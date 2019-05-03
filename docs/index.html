@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>BNS  Reference</title>
+    <link rel="stylesheet" type="text/css" href="css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="css/highlight.css" />
+    <meta charset='utf-8'>
+	<meta name="viewport" content="width=device-width, viewport-fit=cover, initial-scale=1.0" />
+    <script src="js/jquery.min.js" defer></script>
+    <script src="js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a title="BNS  Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p>
+          <a href="index.html">BNS Docs</a>
+          <span class="no-mobile"> (100% documented)</span>
+        </p>
+    
+    
+      </div>
+    </header>
+    <div id="breadcrumbs-container">
+      <div class="content-wrapper">
+        <p id="breadcrumbs">
+          <span class="no-mobile">
+            <a href="index.html">BNS Reference</a>
+            <img id="carat" src="img/carat.png" />
+          </span>
+          BNS  Reference
+        </p>
+      </div>
+    </div>
+    <div class="wrapper">
+      <div class="article-wrapper">
+        <article class="main-content">
+          <section>
+            <section class="section">
+              
+              <h1 id='bootstrap-network-services' class='heading'>Bootstrap Network Services</h1>
+
+<p>This library provides a way to bootstrap network services for Swift NIO. It is a currently a copy of a subset of
+Apple&rsquo;s <a href="https://developer.apple.com/documentation/network">Network framework</a> API on top of Swift NIO&rsquo;s various projects. While this
+library tries to mimic some of the behavior described in <a href="https://developer.apple.com/videos/play/wwdc2018/715/">WWDC 2018 Session 715</a>, there
+are some differences (and probably bugs in this library).</p>
+
+<p>The main abstractions are a listener (server), connections (from inbound clients), and streams from the connections.
+The separation of the connection and the stream allows more granular control than what is present
+in some server side frameworks.</p>
+
+<p>For HTTP, a connection represents a socket while a stream represents an individual resource request. One connection
+can make multiple resource requests via persistent connections using HTTP/1 or HTTP/2. In HTTP/2, requests can
+be multiplexed.</p>
+
+<p>For WebSockets, there is only one stream for a connection.</p>
+
+<p>While some libraries/frameworks are primarily concerned with processing HTTP request/responses, there are some
+applications which desire control over the entire client&rsquo;s lifecycle.</p>
+
+<p>Routing, content encoding and decoding, content negotiation, and other related code are not provided. At least for now,
+you will either need to build them yourself or use a different library/framework.</p>
+<h2 id='usage' class='heading'>Usage</h2>
+
+<p>The latest version of Swift is used for development (currently 5.0.1).</p>
+
+<p>Add the following dependencies to your <code>Package.swift</code> file:</p>
+<pre class="highlight swift"><code><span class="o">.</span><span class="nf">package</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="s">"https://github.com/apple/swift-nio.git"</span><span class="p">,</span> <span class="nv">from</span><span class="p">:</span> <span class="s">"2.0.1"</span><span class="p">),</span>
+<span class="o">.</span><span class="nf">package</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="s">"https://github.com/apple/swift-nio-ssl.git"</span><span class="p">,</span> <span class="nv">from</span><span class="p">:</span> <span class="s">"2.0.2"</span><span class="p">),</span>
+<span class="o">.</span><span class="nf">package</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="s">"https://github.com/apple/swift-nio-http2.git"</span><span class="p">,</span> <span class="nv">from</span><span class="p">:</span> <span class="s">"1.0.0"</span><span class="p">),</span>
+<span class="o">.</span><span class="nf">package</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="s">"https://github.com/apple/swift-nio-extras.git"</span><span class="p">,</span> <span class="nv">from</span><span class="p">:</span> <span class="s">"1.0.0"</span><span class="p">),</span>
+<span class="o">.</span><span class="nf">package</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="s">"https://github.com/apple/swift-log.git"</span><span class="p">,</span> <span class="nv">from</span><span class="p">:</span> <span class="s">"1.0.0"</span><span class="p">),</span>
+<span class="o">.</span><span class="nf">package</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="s">"https://github.com/bluk/bns.git"</span><span class="p">,</span> <span class="o">.</span><span class="nf">branch</span><span class="p">(</span><span class="s">"master"</span><span class="p">)),</span>
+</code></pre>
+
+<p>In your target&rsquo;s dependencies, you will need to add the following:</p>
+<pre class="highlight swift"><code><span class="o">.</span><span class="nf">target</span><span class="p">(</span>
+  <span class="nv">name</span><span class="p">:</span> <span class="s">"Your App"</span>
+  <span class="nv">dependencies</span><span class="p">:</span> <span class="p">[</span><span class="s">"NIO"</span><span class="p">,</span> <span class="s">"NIOHTTP1"</span><span class="p">,</span> <span class="s">"NIOExtras"</span><span class="p">,</span> <span class="s">"Logging"</span><span class="p">,</span> <span class="s">"BNS"</span><span class="p">]</span>
+<span class="p">)</span>
+</code></pre>
+
+<p>See the examples in <a href="https://github.com/bluk/bns/tree/master/Sources">this repository&rsquo;s <code>Sources</code> directory</a> for code usage.</p>
+<h2 id='purpose' class='heading'>Purpose</h2>
+
+<p>This is an experimental library used for project spikes with existing Swift code. It is extracted from some common
+code used in a few small services. The intention is to provide a package which implements a facade API on top
+of Swift NIO, so that Swift server applications and libraries can be easier to bootstrap.</p>
+
+<p>Please feel free to create issues, pull requests, and/or fork the project.</p>
+<h3 id='initial-design' class='heading'>Initial Design</h3>
+
+<p>There were a few requirements kept in mind for the initial design.</p>
+
+<p>First, the library should be a relatively thin layer over Swift NIO. The intention is not to encapsulate Swift NIO
+away; the intention is to provide an alternative way to handle common state management without repeatedly wiring up
+<code>ChannelHandler</code> code. For instance, the connections and streams provide direct access to the <code>Channel</code>s and
+<code>EventLoop</code>s, so it is possible to modify a connection&rsquo;s underlying <code>ChannelPipeline</code> among other possible ideas.
+If there&rsquo;s an option that can be set on <code>ServerBootstrap</code> (or if you want to use the <code>NIO Transport Services</code> version
+of <code>ServerBootstrap</code>), then you should be able to set it without requiring code from this library. If Swift NIO exposes
+more functionality, there should be preferably no required changes in this library to expose the new features.</p>
+
+<p>Second, the library should allow processing of inbound and outbound data at a rate your application
+controls. The <code>receive*</code> and <code>send*</code> methods are based on Network.framework&rsquo;s corresponding APIs which make this easier
+than some other network APIs.</p>
+
+<p>Third, the library should make working with existing Swift app code relatively easy. Therefore, Grand Central
+Dispatch queues are used for dispatching callbacks and are the primary form of concurrency which callers of the
+library will need to interact with. One of the reasons why Swift server side is being explored is to re-use existing
+Swift skills and code on the server side; most of those skills and code come from an app development&rsquo;s perspective
+which primarily uses GCD. Instead of thinking about whether or not each callback implementation is blocking or not,
+callbacks are invoked on a dispatch queue (not within any Swift NIO <code>EventLoop</code>). While not good for performance,
+it is generally the safer choice.</p>
+<h3 id='production-usage' class='heading'>Production Usage</h3>
+
+<p>This library is only an experiment at this point. It is not recommended for any production usage. There are a number
+of missing tests for this library, especially for HTTP/2 and WebSocket, and the APIs are not guaranteed to be stable.</p>
+<h2 id='development' class='heading'>Development</h2>
+<h3 id='debug-code' class='heading'>Debug code</h3>
+
+<p>There are branches of the code (which may or may not be in the <code>master</code> branch)
+which are only enabled with the <code>DEBUG</code> flag.</p>
+
+<p>To enable the <code>DEBUG</code> compilation flag, run:</p>
+<pre class="highlight shell"><code>swift build <span class="nt">-c</span> debug <span class="nt">-Xswiftc</span> ‘-DDEBUG’
+</code></pre>
+<h3 id='generate-documentation' class='heading'>Generate Documentation</h3>
+
+<p>To generate the documentation, you need Ruby installed, and then run:</p>
+<pre class="highlight shell"><code>bundle <span class="nb">install
+</span>swift package generate-xcodeproj
+jazzy
+</code></pre>
+<h2 id='random-quirks' class='heading'>Random Quirks</h2>
+<h3 id='starting-connections-and-streams' class='heading'>Starting Connections and Streams</h3>
+
+<p>When the new connection handler and new stream handlers are invoked, it is important to set the
+properties on the connection/stream and then <code>start</code> the connection or stream as soon as
+possible:</p>
+<pre class="highlight swift"><code><span class="n">listener</span><span class="o">.</span><span class="n">newConnectionHandler</span> <span class="o">=</span> <span class="p">{</span> <span class="n">connectionType</span> <span class="k">in</span>
+    <span class="k">let</span> <span class="nv">connection</span><span class="p">:</span> <span class="kt">BNSBaseConnection</span> <span class="o">=</span> <span class="n">connectionType</span><span class="o">.</span><span class="n">baseConnection</span>
+    <span class="n">connection</span><span class="o">.</span><span class="n">stateUpdateHandler</span> <span class="o">=</span> <span class="p">{</span> <span class="n">state</span> <span class="k">in</span>
+        <span class="k">switch</span> <span class="n">state</span> <span class="p">{</span>
+        <span class="k">case</span> <span class="o">.</span><span class="n">setup</span><span class="p">,</span> <span class="o">.</span><span class="n">preparing</span><span class="p">,</span> <span class="o">.</span><span class="n">ready</span><span class="p">,</span> <span class="o">.</span><span class="nv">cancelled</span><span class="p">:</span>
+            <span class="k">break</span>
+        <span class="k">case</span> <span class="o">.</span><span class="nv">failed</span><span class="p">:</span>
+            <span class="n">connection</span><span class="o">.</span><span class="nf">cancel</span><span class="p">()</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">switch</span> <span class="n">connectionType</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="kd">let</span> <span class="o">.</span><span class="nf">http1</span><span class="p">(</span><span class="n">httpConnection</span><span class="p">):</span>
+        <span class="n">httpConnection</span><span class="o">.</span><span class="n">newStreamHandler</span> <span class="o">=</span> <span class="n">handleHTTPStream</span>
+    <span class="k">case</span> <span class="o">.</span><span class="nv">webSocket</span><span class="p">:</span>
+        <span class="nf">preconditionFailure</span><span class="p">(</span><span class="s">"Unexpected WebSocket connection."</span><span class="p">)</span>
+    <span class="k">case</span> <span class="o">.</span><span class="nv">http2</span><span class="p">:</span>
+        <span class="nf">preconditionFailure</span><span class="p">(</span><span class="s">"Unexpected HTTP/2 connection."</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="n">connection</span><span class="o">.</span><span class="nf">start</span><span class="p">(</span><span class="nv">queue</span><span class="p">:</span> <span class="kt">DispatchQueue</span><span class="p">(</span><span class="nv">label</span><span class="p">:</span> <span class="s">"AConnectionQueue"</span><span class="p">))</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>While there are no callbacks issues before the <code>start</code> method is called, any inbound data sent for
+the connection and/or stream is still buffered. Depending on your system, it is not advisible to keep
+inbound data buffered for too long. There is a maximum amount of data which can be set in the
+configuration options (<code>maxBufferSizeBeforeConnectionStart</code>) for connections. If the amount of inbound
+data exceeds the max size before start on the connection is called, the connection will be closed. There
+is no equivalent option for streams.</p>
+<h3 id='states' class='heading'>States</h3>
+
+<p>The listener, connection, and stream types all have state handlers. Usually, you should listen to at least
+the <code>.ready</code> and <code>.failed</code> states. The states normally progress from <code>.setup</code> to <code>.preparing</code>/<code>.waiting</code> to
+<code>.ready</code>. At any point, you can call <code>cancel()</code> and eventually the state will reach the terminal <code>.cancelled</code>
+state.</p>
+
+<p>All objects must reach the <code>.cancelled</code> state before they are <code>deinit</code> to ensure resources
+will be properly cleaned up. A connection&rsquo;s or stream&rsquo;s underlying <code>Channel</code> may be closed, but in order to
+cleanup state, the <code>cancel()</code> method must be invoked. There are various <code>assert</code>s to make sure that you call
+cancel before the object is <code>deinit</code>.</p>
+
+<p>There is a <code>.failed(Error)</code> state as well. This state may be transitioned to at any time. Currently,
+you may get repeated <code>.failed</code> state transition callbacks with each error that has occurred. You must still
+call <code>cancel()</code> to transition from <code>.failed</code> to <code>.cancelled</code>.</p>
+<h3 id='sending-data' class='heading'>Sending Data</h3>
+
+<p>When sending data, there is a <code>completion</code> parameter which is of the <code><a href="Enums/BNSStreamSendCompletion.html">BNSStreamSendCompletion</a></code> type.
+The type has two enum values, <code>idempotent</code> and <code>contentProcessed</code>.  To stream out data to the underlying channel,
+you can do something like:</p>
+<pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">sendMyData</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">var</span> <span class="nv">myData</span><span class="p">:</span> <span class="kt">Data</span> <span class="o">=</span> <span class="cm">/* compute some data to send */</span>
+  <span class="n">stream</span><span class="o">.</span><span class="nf">send</span><span class="p">(</span><span class="nv">content</span><span class="p">:</span> <span class="n">myData</span><span class="p">,</span> <span class="nv">completion</span><span class="p">:</span> <span class="o">.</span><span class="n">contentProcessed</span> <span class="p">{</span> <span class="n">error</span> <span class="k">in</span>
+    <span class="k">if</span> <span class="k">let</span> <span class="nv">error</span> <span class="o">=</span> <span class="n">error</span> <span class="p">{</span>
+      <span class="c1">// handle the error</span>
+      <span class="k">return</span>
+    <span class="p">}</span>
+
+    <span class="nf">sendMyData</span><span class="p">()</span>
+  <span class="p">})</span>
+<span class="p">}</span>
+</code></pre>
+<h3 id='sending-with-content-contexts-and-iscomplete' class='heading'>Sending with Content Contexts and isComplete</h3>
+
+<p>In the send methods, there are <code>contentContext</code> and <code>isComplete</code> parameters which help when multiple
+send calls are invoked. The <code>contentContext</code>
+provides more information about the data being sent (e.g. is this the final content to be sent). The <code>isComplete</code>
+parameter helps determine when it is ok to write all the content related to the <code>contentContext</code> to the channel.
+So in practice, if you want to have this library buffer the data to send, you can use the same <code>contentContext</code>
+instance and <code>isComplete</code> set to <code>false</code>. When sending the last piece of content, set <code>isComplete</code> to true.</p>
+
+<p>The <code>contentContext</code> has object identity equality semantics. So two different instances (which may have the same
+property values) are never equal; you must re-use the same object to identify content for the same context.</p>
+
+<p>For instance, here&rsquo;s sending data in stages:</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">dataContext</span> <span class="o">=</span> <span class="kt">BNSStreamContentContext</span><span class="p">(</span><span class="nv">isFinal</span><span class="p">:</span> <span class="kc">true</span><span class="p">)</span>
+<span class="k">var</span> <span class="nv">someData</span><span class="p">:</span> <span class="kt">Data</span> <span class="o">=</span> <span class="cm">/* ... */</span>
+<span class="n">stream</span><span class="o">.</span><span class="nf">send</span><span class="p">(</span>
+  <span class="nv">content</span><span class="p">:</span> <span class="n">someData</span><span class="p">,</span>
+  <span class="nv">contentContext</span><span class="p">:</span> <span class="n">dataContext</span><span class="p">,</span>
+  <span class="nv">isComplete</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="nv">completion</span><span class="p">:</span> <span class="o">.</span><span class="n">contentProcessed</span> <span class="p">{</span> <span class="n">error</span> <span class="k">in</span>
+    <span class="cm">/* handle possible error */</span>
+    <span class="cm">/* note this will not be invoked until some time after the send below with `isComplete` = true is invoked */</span>
+  <span class="p">}</span>
+<span class="p">)</span>
+
+<span class="cm">/* someData is buffered and not written to the channel yet */</span>
+
+<span class="cm">/* ... some time later ... */</span>
+
+<span class="k">var</span> <span class="nv">someMoreData</span><span class="p">:</span> <span class="kt">Data</span> <span class="o">=</span> <span class="cm">/* ... */</span>
+<span class="n">stream</span><span class="o">.</span><span class="nf">send</span><span class="p">(</span>
+  <span class="nv">content</span><span class="p">:</span> <span class="n">someMoreData</span><span class="p">,</span>
+  <span class="nv">contentContext</span><span class="p">:</span> <span class="n">dataContext</span><span class="p">,</span> <span class="cm">/* the same instance */</span>
+  <span class="nv">isComplete</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="nv">completion</span><span class="p">:</span> <span class="o">.</span><span class="n">contentProcessed</span> <span class="p">{</span> <span class="n">error</span> <span class="k">in</span> <span class="cm">/* handle possible error */</span> <span class="p">}</span>
+<span class="p">)</span>
+
+<span class="cm">/* someData and someMoreData are both written due to isComplete = true */</span>
+</code></pre>
+
+<p>There are more properties and features for the <code><a href="Classes/BNSStreamContentContext.html">BNSStreamContentContext</a></code> which are not written yet.</p>
+<h3 id='sending-with-isfinal-content-context' class='heading'>Sending with isFinal Content Context</h3>
+
+<p>One <code><a href="Classes/BNSStreamContentContext.html">BNSStreamContentContext</a></code> property is <code>isFinal</code>. This indicates this is the last content to send.
+In most HTTP request/response cycles, you only have one response content for a stream so when you send content, it
+should always have a content context with <code>isFinal</code> set to <code>true</code>. For HTTP, when <code>isFinal</code> is <code>true</code> and <code>isComplete</code>
+is <code>true</code> for a send, the HTTP stream will write the content, then any trailing response headers set, and
+finish the response.</p>
+
+<p>For normal workflows:</p>
+<pre class="highlight swift"><code><span class="cm">/* optionally set any trailing HTTP response headers */</span>
+<span class="k">var</span> <span class="nv">trailerResponseHTTPHeaders</span> <span class="o">=</span> <span class="kt">HTTPHeaders</span><span class="p">()</span>
+<span class="n">stream</span><span class="o">.</span><span class="n">responseTrailerHeaders</span> <span class="o">=</span> <span class="n">trailerResponseHTTPHeaders</span>
+
+<span class="cm">/* send the response */</span>
+<span class="k">let</span> <span class="nv">finalMessageContext</span> <span class="o">=</span> <span class="kt">BNSStreamContentContext</span><span class="p">(</span><span class="nv">isFinal</span><span class="p">:</span> <span class="kc">true</span><span class="p">)</span> <span class="cm">/* or use BNSStreamContentContext.finalMessage */</span>
+<span class="k">var</span> <span class="nv">someData</span><span class="p">:</span> <span class="kt">Data</span> <span class="o">=</span> <span class="cm">/* ... */</span>
+<span class="n">stream</span><span class="o">.</span><span class="nf">send</span><span class="p">(</span>
+  <span class="nv">content</span><span class="p">:</span> <span class="n">someData</span><span class="p">,</span>
+  <span class="nv">contentContext</span><span class="p">:</span> <span class="n">finalMessageContext</span><span class="p">,</span>
+  <span class="nv">isComplete</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="nv">completion</span><span class="p">:</span> <span class="o">.</span><span class="n">contentProcessed</span> <span class="p">{</span> <span class="n">error</span> <span class="k">in</span> <span class="cm">/* handle possible error */</span> <span class="p">}</span>
+<span class="p">)</span>
+</code></pre>
+<h3 id='logging' class='heading'>Logging</h3>
+
+<p>The project uses the <a href="https://github.com/apple/swift-log">swift-log</a> API package. The idea behind logging is to enable a unique <code>Logger</code>
+to be attached to any connection or any stream at any point. So if you wanted to log streams for a known
+set of URIs, you can do so.</p>
+
+<p>For instance, if you want to identify every unique request made from a client connection, you can write:</p>
+<pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">Foundation</span>
+<span class="cm">/* ... */</span>
+<span class="k">var</span> <span class="nv">connectionLogger</span> <span class="o">=</span> <span class="kt">Logger</span><span class="p">(</span><span class="nv">label</span><span class="p">:</span> <span class="s">"Connection1234"</span><span class="p">)</span>
+<span class="n">connectionLogger</span><span class="p">[</span><span class="nv">metadataKey</span><span class="p">:</span> <span class="s">"connectionID"</span><span class="p">]</span> <span class="o">=</span> <span class="s">"</span><span class="se">\(</span><span class="kt">UUID</span><span class="p">()</span><span class="se">)</span><span class="s">"</span>
+<span class="n">connection</span><span class="o">.</span><span class="n">logger</span> <span class="o">=</span> <span class="n">connectionLogger</span>
+</code></pre>
+
+<p>Later in a stream, you can write:</p>
+<pre class="highlight swift"><code><span class="k">var</span> <span class="nv">streamLogger</span> <span class="o">=</span> <span class="n">connectionLogger</span>
+<span class="n">streamLogger</span><span class="p">[</span><span class="nv">metadataKey</span><span class="p">:</span> <span class="s">"streamID"</span><span class="p">]</span> <span class="o">=</span> <span class="s">"</span><span class="se">\(</span><span class="kt">UInt16</span><span class="o">.</span><span class="nf">random</span><span class="p">(</span><span class="nv">in</span><span class="p">:</span> <span class="kt">UInt16</span><span class="o">.</span><span class="n">min</span><span class="o">...</span><span class="kt">UInt16</span><span class="o">.</span><span class="n">max</span><span class="p">)</span><span class="se">)</span><span class="s">"</span>
+<span class="n">stream</span><span class="o">.</span><span class="n">logger</span> <span class="o">=</span> <span class="n">streamLogger</span>
+</code></pre>
+
+<p>Due to value type semantics, the connection logger will have (only) the connection ID while the stream logger
+will have both the connection ID and the stream ID as contextual logging metadata.</p>
+<h2 id='license' class='heading'>License</h2>
+
+<p><a href="LICENSE">Apache-2.0 License</a></p>
+
+            </section>
+          </section>
+        </article>
+      </div>
+      <div class="nav-wrapper">
+        <nav class="nav-bottom">
+          <ul class="nav-groups">
+            <li class="nav-group-name">
+              <a href="Classes.html">Classes</a>
+              <ul class="nav-group-tasks">
+                <li class="nav-group-task">
+                  <a href="Classes/BNSHTTP1Connection.html">BNSHTTP1Connection</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="Classes/BNSHTTP1Stream.html">BNSHTTP1Stream</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="Classes/BNSHTTP2Connection.html">BNSHTTP2Connection</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="Classes/BNSHTTP2Stream.html">BNSHTTP2Stream</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="Classes/BNSListener.html">BNSListener</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="Classes/BNSListener/Configuration.html">– Configuration</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="Classes/BNSListener/FeatureOptions.html">– FeatureOptions</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="Classes/BNSListener/ProtocolSupportOptions.html">– ProtocolSupportOptions</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="Classes/BNSListener/State.html">– State</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="Classes/BNSStreamContentContext.html">BNSStreamContentContext</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="Classes/BNSWebSocketConnection.html">BNSWebSocketConnection</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="Classes/BNSWebSocketStream.html">BNSWebSocketStream</a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-group-name">
+              <a href="Global Variables.html">Global Variables</a>
+              <ul class="nav-group-tasks">
+                <li class="nav-group-task">
+                  <a href="Global Variables.html#/s:3BNS23BNSDefaultCallbackQueueSo17OS_dispatch_queueCvp">BNSDefaultCallbackQueue</a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-group-name">
+              <a href="Enums.html">Enumerations</a>
+              <ul class="nav-group-tasks">
+                <li class="nav-group-task">
+                  <a href="Enums/BNSChannelHandlerName.html">BNSChannelHandlerName</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="Enums/BNSConnection.html">BNSConnection</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="Enums/BNSConnectionError.html">BNSConnectionError</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="Enums/BNSConnectionState.html">BNSConnectionState</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="Enums/BNSListenerError.html">BNSListenerError</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="Enums/BNSStream.html">BNSStream</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="Enums/BNSStreamError.html">BNSStreamError</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="Enums/BNSStreamSendCompletion.html">BNSStreamSendCompletion</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="Enums/BNSStreamState.html">BNSStreamState</a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-group-name">
+              <a href="Protocols.html">Protocols</a>
+              <ul class="nav-group-tasks">
+                <li class="nav-group-task">
+                  <a href="Protocols/BNSBaseConnection.html">BNSBaseConnection</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="Protocols/BNSBaseStream.html">BNSBaseStream</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="Protocols.html#/s:3BNS17BNSHTTPConnectionP">BNSHTTPConnection</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="Protocols/BNSHTTPStream.html">BNSHTTPStream</a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-group-name">
+              <a href="Typealiases.html">Type Aliases</a>
+              <ul class="nav-group-tasks">
+                <li class="nav-group-task">
+                  <a href="Typealiases.html#/s:3BNS20BNSConnectionHandlera">BNSConnectionHandler</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="Typealiases.html#/s:3BNS38BNSHTTPShouldUpgradeToWebSocketHandlera">BNSHTTPShouldUpgradeToWebSocketHandler</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="Typealiases.html#/s:3BNS16BNSStreamHandlera">BNSStreamHandler</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <div class="footer-wrapper">
+        <section id="footer">
+          <p>&copy; 2019 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2019-05-03)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </div>
+    </div>
+  </body>
+</div>
+</html>

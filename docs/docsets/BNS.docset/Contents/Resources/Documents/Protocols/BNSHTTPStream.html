@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>BNSHTTPStream Protocol Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+	<meta name="viewport" content="width=device-width, viewport-fit=cover, initial-scale=1.0" />
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Protocol/BNSHTTPStream" class="dashAnchor"></a>
+    <a title="BNSHTTPStream Protocol Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p>
+          <a href="../index.html">BNS Docs</a>
+          <span class="no-mobile"> (100% documented)</span>
+        </p>
+    
+    
+      </div>
+    </header>
+    <div id="breadcrumbs-container">
+      <div class="content-wrapper">
+        <p id="breadcrumbs">
+          <span class="no-mobile">
+            <a href="../index.html">BNS Reference</a>
+            <img id="carat" src="../img/carat.png" />
+          </span>
+          BNSHTTPStream Protocol Reference
+        </p>
+      </div>
+    </div>
+    <div class="wrapper">
+      <div class="article-wrapper">
+        <article class="main-content">
+          <section>
+            <section class="section">
+              <h1>BNSHTTPStream</h1>
+                <div class="declaration">
+                  <div class="language">
+                    <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">BNSHTTPStream</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/BNSBaseStream.html">BNSBaseStream</a></span></code></pre>
+
+                  </div>
+                </div>
+              <p>BNSHTTPStream represents a HTTP request/response stream.</p>
+
+            </section>
+            <section class="section task-group-section">
+              <div class="task-group">
+                <ul>
+                  <li class="item">
+                    <div>
+                      <code>
+                      <a name="/s:3BNS13BNSHTTPStreamP11requestHead8NIOHTTP1011HTTPRequestD0VSgvp"></a>
+                      <a name="//apple_ref/swift/Property/requestHead" class="dashAnchor"></a>
+                      <a class="token" href="#/s:3BNS13BNSHTTPStreamP11requestHead8NIOHTTP1011HTTPRequestD0VSgvp">requestHead</a>
+                      </code>
+                    </div>
+                    <div class="height-container">
+                      <div class="pointer-container"></div>
+                      <section class="section">
+                        <div class="pointer"></div>
+                        <div class="abstract">
+                          <p>The head of the request containing the request method, URI, and headers.</p>
+
+                        </div>
+                        <div class="declaration">
+                          <h4>Declaration</h4>
+                          <div class="language">
+                            <p class="aside-title">Swift</p>
+                            <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">requestHead</span><span class="p">:</span> <span class="kt">HTTPRequestHead</span><span class="p">?</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                          </div>
+                        </div>
+                      </section>
+                    </div>
+                  </li>
+                  <li class="item">
+                    <div>
+                      <code>
+                      <a name="/s:3BNS13BNSHTTPStreamP21requestTrailerHeaders8NIOHTTP111HTTPHeadersVSgvp"></a>
+                      <a name="//apple_ref/swift/Property/requestTrailerHeaders" class="dashAnchor"></a>
+                      <a class="token" href="#/s:3BNS13BNSHTTPStreamP21requestTrailerHeaders8NIOHTTP111HTTPHeadersVSgvp">requestTrailerHeaders</a>
+                      </code>
+                    </div>
+                    <div class="height-container">
+                      <div class="pointer-container"></div>
+                      <section class="section">
+                        <div class="pointer"></div>
+                        <div class="abstract">
+                          <p>Any trailing headers in the request. Must be accessed on the callback queue.
+If there are any trailer headers, it is set before the receive completion&rsquo;s
+boolean isComplete is true.</p>
+
+                        </div>
+                        <div class="declaration">
+                          <h4>Declaration</h4>
+                          <div class="language">
+                            <p class="aside-title">Swift</p>
+                            <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">requestTrailerHeaders</span><span class="p">:</span> <span class="kt">HTTPHeaders</span><span class="p">?</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                          </div>
+                        </div>
+                      </section>
+                    </div>
+                  </li>
+                  <li class="item">
+                    <div>
+                      <code>
+                      <a name="/s:3BNS13BNSHTTPStreamP22wasResponseHeadWrittenSbvp"></a>
+                      <a name="//apple_ref/swift/Property/wasResponseHeadWritten" class="dashAnchor"></a>
+                      <a class="token" href="#/s:3BNS13BNSHTTPStreamP22wasResponseHeadWrittenSbvp">wasResponseHeadWritten</a>
+                      </code>
+                    </div>
+                    <div class="height-container">
+                      <div class="pointer-container"></div>
+                      <section class="section">
+                        <div class="pointer"></div>
+                        <div class="abstract">
+                          <p>If the response head was written to the underlying network layer. Must be accessed on the callback queue.</p>
+
+                        </div>
+                        <div class="declaration">
+                          <h4>Declaration</h4>
+                          <div class="language">
+                            <p class="aside-title">Swift</p>
+                            <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">wasResponseHeadWritten</span><span class="p">:</span> <span class="kt">Bool</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                          </div>
+                        </div>
+                      </section>
+                    </div>
+                  </li>
+                  <li class="item">
+                    <div>
+                      <code>
+                      <a name="/s:3BNS13BNSHTTPStreamP12responseHead8NIOHTTP1012HTTPResponseD0VSgvp"></a>
+                      <a name="//apple_ref/swift/Property/responseHead" class="dashAnchor"></a>
+                      <a class="token" href="#/s:3BNS13BNSHTTPStreamP12responseHead8NIOHTTP1012HTTPResponseD0VSgvp">responseHead</a>
+                      </code>
+                    </div>
+                    <div class="height-container">
+                      <div class="pointer-container"></div>
+                      <section class="section">
+                        <div class="pointer"></div>
+                        <div class="abstract">
+                          <p>The head of the response containing the response status code and headers. It must be set before
+the first completed message is sent.</p>
+
+                        </div>
+                        <div class="declaration">
+                          <h4>Declaration</h4>
+                          <div class="language">
+                            <p class="aside-title">Swift</p>
+                            <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">responseHead</span><span class="p">:</span> <span class="kt">HTTPResponseHead</span><span class="p">?</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                          </div>
+                        </div>
+                      </section>
+                    </div>
+                  </li>
+                  <li class="item">
+                    <div>
+                      <code>
+                      <a name="/s:3BNS13BNSHTTPStreamP22responseTrailerHeaders8NIOHTTP111HTTPHeadersVSgvp"></a>
+                      <a name="//apple_ref/swift/Property/responseTrailerHeaders" class="dashAnchor"></a>
+                      <a class="token" href="#/s:3BNS13BNSHTTPStreamP22responseTrailerHeaders8NIOHTTP111HTTPHeadersVSgvp">responseTrailerHeaders</a>
+                      </code>
+                    </div>
+                    <div class="height-container">
+                      <div class="pointer-container"></div>
+                      <section class="section">
+                        <div class="pointer"></div>
+                        <div class="abstract">
+                          <p>The response trailer headers. If there are any to send, they must be set before the message body&rsquo;s
+final message with isComplete is sent.</p>
+
+                        </div>
+                        <div class="declaration">
+                          <h4>Declaration</h4>
+                          <div class="language">
+                            <p class="aside-title">Swift</p>
+                            <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">responseTrailerHeaders</span><span class="p">:</span> <span class="kt">HTTPHeaders</span><span class="p">?</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                          </div>
+                        </div>
+                      </section>
+                    </div>
+                  </li>
+                  <li class="item">
+                    <div>
+                      <code>
+                      <a name="/s:3BNS13BNSHTTPStreamP14receiveMessage10completionyy10Foundation4DataVSg_AA23BNSStreamContentContextCSgSbs5Error_pSgtc_tF"></a>
+                      <a name="//apple_ref/swift/Method/receiveMessage(completion:)" class="dashAnchor"></a>
+                      <a class="token" href="#/s:3BNS13BNSHTTPStreamP14receiveMessage10completionyy10Foundation4DataVSg_AA23BNSStreamContentContextCSgSbs5Error_pSgtc_tF">receiveMessage(completion:)</a>
+                      </code>
+                    </div>
+                    <div class="height-container">
+                      <div class="pointer-container"></div>
+                      <section class="section">
+                        <div class="pointer"></div>
+                        <div class="abstract">
+                          <p>Receives a complete message. The completion handler is only called once.</p>
+
+                        </div>
+                        <div class="declaration">
+                          <h4>Declaration</h4>
+                          <div class="language">
+                            <p class="aside-title">Swift</p>
+                            <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">receiveMessage</span><span class="p">(</span><span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Data</span><span class="p">?,</span> <span class="kt"><a href="../Classes/BNSStreamContentContext.html">BNSStreamContentContext</a></span><span class="p">?,</span> <span class="kt">Bool</span><span class="p">,</span> <span class="kt">Error</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                          </div>
+                        </div>
+                        <div>
+                          <h4>Parameters</h4>
+                          <table class="graybox">
+                            <tbody>
+                              <tr>
+                                <td>
+                                  <code>
+                                  <em>completion</em>
+                                  </code>
+                                </td>
+                                <td>
+                                  <div>
+                                    <p>The completion callback to use when data is received.</p>
+                                  </div>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </section>
+                    </div>
+                  </li>
+                  <li class="item">
+                    <div>
+                      <code>
+                      <a name="/s:3BNS13BNSHTTPStreamP7receive23minimumIncompleteLength07maximumF010completionySi_Siy10Foundation4DataVSg_AA23BNSStreamContentContextCSgSbs5Error_pSgtctF"></a>
+                      <a name="//apple_ref/swift/Method/receive(minimumIncompleteLength:maximumLength:completion:)" class="dashAnchor"></a>
+                      <a class="token" href="#/s:3BNS13BNSHTTPStreamP7receive23minimumIncompleteLength07maximumF010completionySi_Siy10Foundation4DataVSg_AA23BNSStreamContentContextCSgSbs5Error_pSgtctF">receive(minimumIncompleteLength:maximumLength:completion:)</a>
+                      </code>
+                    </div>
+                    <div class="height-container">
+                      <div class="pointer-container"></div>
+                      <section class="section">
+                        <div class="pointer"></div>
+                        <div class="abstract">
+                          <p>Recieves content. The completion handler is only called once.</p>
+
+                        </div>
+                        <div class="declaration">
+                          <h4>Declaration</h4>
+                          <div class="language">
+                            <p class="aside-title">Swift</p>
+                            <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">receive</span><span class="p">(</span><span class="nv">minimumIncompleteLength</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="nv">maximumLength</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Data</span><span class="p">?,</span> <span class="kt"><a href="../Classes/BNSStreamContentContext.html">BNSStreamContentContext</a></span><span class="p">?,</span> <span class="kt">Bool</span><span class="p">,</span> <span class="kt">Error</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                          </div>
+                        </div>
+                        <div>
+                          <h4>Parameters</h4>
+                          <table class="graybox">
+                            <tbody>
+                              <tr>
+                                <td>
+                                  <code>
+                                  <em>minimumIncompleteLength</em>
+                                  </code>
+                                </td>
+                                <td>
+                                  <div>
+                                    <p>The desired minimum length before the completion callback is invoked.</p>
+                                  </div>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>
+                                  <code>
+                                  <em>maximumLength</em>
+                                  </code>
+                                </td>
+                                <td>
+                                  <div>
+                                    <p>The maximum amount of data to invoke the completion handler with.</p>
+                                  </div>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>
+                                  <code>
+                                  <em>completion</em>
+                                  </code>
+                                </td>
+                                <td>
+                                  <div>
+                                    <p>The completion callback to use when data is received.</p>
+                                  </div>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </section>
+                    </div>
+                  </li>
+                  <li class="item">
+                    <div>
+                      <code>
+                      <a name="/s:3BNS13BNSHTTPStreamP4send7content10completiony10Foundation4DataV_AA23BNSStreamSendCompletionOtF"></a>
+                      <a name="//apple_ref/swift/Method/send(content:completion:)" class="dashAnchor"></a>
+                      <a class="token" href="#/s:3BNS13BNSHTTPStreamP4send7content10completiony10Foundation4DataV_AA23BNSStreamSendCompletionOtF">send(content:completion:)</a>
+                      </code>
+                        <span class="declaration-note">
+                          Default implementation
+                        </span>
+                    </div>
+                    <div class="height-container">
+                      <div class="pointer-container"></div>
+                      <section class="section">
+                        <div class="pointer"></div>
+                        <div class="abstract">
+                          <p>Buffers data to send.</p>
+
+                        </div>
+                        <h4>Default Implementation</h4>
+                        <div class="default_impl abstract">
+                          <p>Buffers data to send.</p>
+<p>Buffers data to send.</p>
+
+                        </div>
+                        <div class="declaration">
+                          <h4>Declaration</h4>
+                          <div class="language">
+                            <p class="aside-title">Swift</p>
+                            <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">send</span><span class="p">(</span><span class="nv">content</span><span class="p">:</span> <span class="kt">Data</span><span class="p">,</span> <span class="nv">completion</span><span class="p">:</span> <span class="kt"><a href="../Enums/BNSStreamSendCompletion.html">BNSStreamSendCompletion</a></span><span class="p">)</span></code></pre>
+
+                          </div>
+                        </div>
+                        <div>
+                          <h4>Parameters</h4>
+                          <table class="graybox">
+                            <tbody>
+                              <tr>
+                                <td>
+                                  <code>
+                                  <em>content</em>
+                                  </code>
+                                </td>
+                                <td>
+                                  <div>
+                                    <p>The data to send.</p>
+                                  </div>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>
+                                  <code>
+                                  <em>completion</em>
+                                  </code>
+                                </td>
+                                <td>
+                                  <div>
+                                    <p>The completion callback to use when data is sent.</p>
+                                  </div>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </section>
+                    </div>
+                  </li>
+                  <li class="item">
+                    <div>
+                      <code>
+                      <a name="/s:3BNS13BNSHTTPStreamP4send7content10completiony3NIO6IODataO_AA23BNSStreamSendCompletionOtF"></a>
+                      <a name="//apple_ref/swift/Method/send(content:completion:)" class="dashAnchor"></a>
+                      <a class="token" href="#/s:3BNS13BNSHTTPStreamP4send7content10completiony3NIO6IODataO_AA23BNSStreamSendCompletionOtF">send(content:completion:)</a>
+                      </code>
+                    </div>
+                    <div class="height-container">
+                      <div class="pointer-container"></div>
+                      <section class="section">
+                        <div class="pointer"></div>
+                        <div class="abstract">
+                          <p>Buffers data to send.</p>
+
+                        </div>
+                        <div class="declaration">
+                          <h4>Declaration</h4>
+                          <div class="language">
+                            <p class="aside-title">Swift</p>
+                            <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">send</span><span class="p">(</span><span class="nv">content</span><span class="p">:</span> <span class="kt">IOData</span><span class="p">,</span> <span class="nv">completion</span><span class="p">:</span> <span class="kt"><a href="../Enums/BNSStreamSendCompletion.html">BNSStreamSendCompletion</a></span><span class="p">)</span></code></pre>
+
+                          </div>
+                        </div>
+                        <div>
+                          <h4>Parameters</h4>
+                          <table class="graybox">
+                            <tbody>
+                              <tr>
+                                <td>
+                                  <code>
+                                  <em>content</em>
+                                  </code>
+                                </td>
+                                <td>
+                                  <div>
+                                    <p>The data to send.</p>
+                                  </div>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>
+                                  <code>
+                                  <em>completion</em>
+                                  </code>
+                                </td>
+                                <td>
+                                  <div>
+                                    <p>The completion callback to use when data is sent.</p>
+                                  </div>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </section>
+                    </div>
+                  </li>
+                  <li class="item">
+                    <div>
+                      <code>
+                      <a name="/s:3BNS13BNSHTTPStreamP4send7content0D7Context10isComplete10completiony10Foundation4DataV_AA016BNSStreamContentE0CSbAA0K14SendCompletionOtF"></a>
+                      <a name="//apple_ref/swift/Method/send(content:contentContext:isComplete:completion:)" class="dashAnchor"></a>
+                      <a class="token" href="#/s:3BNS13BNSHTTPStreamP4send7content0D7Context10isComplete10completiony10Foundation4DataV_AA016BNSStreamContentE0CSbAA0K14SendCompletionOtF">send(content:contentContext:isComplete:completion:)</a>
+                      </code>
+                        <span class="declaration-note">
+                          Default implementation
+                        </span>
+                    </div>
+                    <div class="height-container">
+                      <div class="pointer-container"></div>
+                      <section class="section">
+                        <div class="pointer"></div>
+                        <div class="abstract">
+                          <p>Buffers data to send.</p>
+
+                        </div>
+                        <h4>Default Implementation</h4>
+                        <div class="default_impl abstract">
+                          <p>Buffers data to send.</p>
+
+                        </div>
+                        <div class="declaration">
+                          <h4>Declaration</h4>
+                          <div class="language">
+                            <p class="aside-title">Swift</p>
+                            <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">send</span><span class="p">(</span><span class="nv">content</span><span class="p">:</span> <span class="kt">Data</span><span class="p">,</span> <span class="nv">contentContext</span><span class="p">:</span> <span class="kt"><a href="../Classes/BNSStreamContentContext.html">BNSStreamContentContext</a></span><span class="p">,</span> <span class="nv">isComplete</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">,</span> <span class="nv">completion</span><span class="p">:</span> <span class="kt"><a href="../Enums/BNSStreamSendCompletion.html">BNSStreamSendCompletion</a></span><span class="p">)</span></code></pre>
+
+                          </div>
+                        </div>
+                        <div>
+                          <h4>Parameters</h4>
+                          <table class="graybox">
+                            <tbody>
+                              <tr>
+                                <td>
+                                  <code>
+                                  <em>content</em>
+                                  </code>
+                                </td>
+                                <td>
+                                  <div>
+                                    <p>The data to send.</p>
+                                  </div>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>
+                                  <code>
+                                  <em>contentContext</em>
+                                  </code>
+                                </td>
+                                <td>
+                                  <div>
+                                    <p>The context for the data being sent.</p>
+                                  </div>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>
+                                  <code>
+                                  <em>isComplete</em>
+                                  </code>
+                                </td>
+                                <td>
+                                  <div>
+                                    <p>If the data being sent represents a complete message.</p>
+                                  </div>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>
+                                  <code>
+                                  <em>completion</em>
+                                  </code>
+                                </td>
+                                <td>
+                                  <div>
+                                    <p>The completion callback to use when data is sent.</p>
+                                  </div>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </section>
+                    </div>
+                  </li>
+                  <li class="item">
+                    <div>
+                      <code>
+                      <a name="/s:3BNS13BNSHTTPStreamP4send7content0D7Context10isComplete10completiony3NIO6IODataOSg_AA016BNSStreamContentE0CSbAA0K14SendCompletionOtF"></a>
+                      <a name="//apple_ref/swift/Method/send(content:contentContext:isComplete:completion:)" class="dashAnchor"></a>
+                      <a class="token" href="#/s:3BNS13BNSHTTPStreamP4send7content0D7Context10isComplete10completiony3NIO6IODataOSg_AA016BNSStreamContentE0CSbAA0K14SendCompletionOtF">send(content:contentContext:isComplete:completion:)</a>
+                      </code>
+                    </div>
+                    <div class="height-container">
+                      <div class="pointer-container"></div>
+                      <section class="section">
+                        <div class="pointer"></div>
+                        <div class="abstract">
+                          <p>Buffers data to send.</p>
+
+                        </div>
+                        <div class="declaration">
+                          <h4>Declaration</h4>
+                          <div class="language">
+                            <p class="aside-title">Swift</p>
+                            <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">send</span><span class="p">(</span><span class="nv">content</span><span class="p">:</span> <span class="kt">IOData</span><span class="p">?,</span> <span class="nv">contentContext</span><span class="p">:</span> <span class="kt"><a href="../Classes/BNSStreamContentContext.html">BNSStreamContentContext</a></span><span class="p">,</span> <span class="nv">isComplete</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">,</span> <span class="nv">completion</span><span class="p">:</span> <span class="kt"><a href="../Enums/BNSStreamSendCompletion.html">BNSStreamSendCompletion</a></span><span class="p">)</span></code></pre>
+
+                          </div>
+                        </div>
+                        <div>
+                          <h4>Parameters</h4>
+                          <table class="graybox">
+                            <tbody>
+                              <tr>
+                                <td>
+                                  <code>
+                                  <em>content</em>
+                                  </code>
+                                </td>
+                                <td>
+                                  <div>
+                                    <p>The data to send.</p>
+                                  </div>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>
+                                  <code>
+                                  <em>contentContext</em>
+                                  </code>
+                                </td>
+                                <td>
+                                  <div>
+                                    <p>The context for the data being sent.</p>
+                                  </div>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>
+                                  <code>
+                                  <em>isComplete</em>
+                                  </code>
+                                </td>
+                                <td>
+                                  <div>
+                                    <p>If the data being sent represents a complete message.</p>
+                                  </div>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>
+                                  <code>
+                                  <em>completion</em>
+                                  </code>
+                                </td>
+                                <td>
+                                  <div>
+                                    <p>The completion callback to use when data is sent.</p>
+                                  </div>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </section>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </section>
+          </section>
+        </article>
+      </div>
+      <div class="nav-wrapper">
+        <nav class="nav-bottom">
+          <ul class="nav-groups">
+            <li class="nav-group-name">
+              <a href="../Classes.html">Classes</a>
+              <ul class="nav-group-tasks">
+                <li class="nav-group-task">
+                  <a href="../Classes/BNSHTTP1Connection.html">BNSHTTP1Connection</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="../Classes/BNSHTTP1Stream.html">BNSHTTP1Stream</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="../Classes/BNSHTTP2Connection.html">BNSHTTP2Connection</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="../Classes/BNSHTTP2Stream.html">BNSHTTP2Stream</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="../Classes/BNSListener.html">BNSListener</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="../Classes/BNSListener/Configuration.html">– Configuration</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="../Classes/BNSListener/FeatureOptions.html">– FeatureOptions</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="../Classes/BNSListener/ProtocolSupportOptions.html">– ProtocolSupportOptions</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="../Classes/BNSListener/State.html">– State</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="../Classes/BNSStreamContentContext.html">BNSStreamContentContext</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="../Classes/BNSWebSocketConnection.html">BNSWebSocketConnection</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="../Classes/BNSWebSocketStream.html">BNSWebSocketStream</a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-group-name">
+              <a href="../Global Variables.html">Global Variables</a>
+              <ul class="nav-group-tasks">
+                <li class="nav-group-task">
+                  <a href="../Global Variables.html#/s:3BNS23BNSDefaultCallbackQueueSo17OS_dispatch_queueCvp">BNSDefaultCallbackQueue</a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-group-name">
+              <a href="../Enums.html">Enumerations</a>
+              <ul class="nav-group-tasks">
+                <li class="nav-group-task">
+                  <a href="../Enums/BNSChannelHandlerName.html">BNSChannelHandlerName</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="../Enums/BNSConnection.html">BNSConnection</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="../Enums/BNSConnectionError.html">BNSConnectionError</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="../Enums/BNSConnectionState.html">BNSConnectionState</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="../Enums/BNSListenerError.html">BNSListenerError</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="../Enums/BNSStream.html">BNSStream</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="../Enums/BNSStreamError.html">BNSStreamError</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="../Enums/BNSStreamSendCompletion.html">BNSStreamSendCompletion</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="../Enums/BNSStreamState.html">BNSStreamState</a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-group-name">
+              <a href="../Protocols.html">Protocols</a>
+              <ul class="nav-group-tasks">
+                <li class="nav-group-task">
+                  <a href="../Protocols/BNSBaseConnection.html">BNSBaseConnection</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="../Protocols/BNSBaseStream.html">BNSBaseStream</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="../Protocols.html#/s:3BNS17BNSHTTPConnectionP">BNSHTTPConnection</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="../Protocols/BNSHTTPStream.html">BNSHTTPStream</a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-group-name">
+              <a href="../Typealiases.html">Type Aliases</a>
+              <ul class="nav-group-tasks">
+                <li class="nav-group-task">
+                  <a href="../Typealiases.html#/s:3BNS20BNSConnectionHandlera">BNSConnectionHandler</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="../Typealiases.html#/s:3BNS38BNSHTTPShouldUpgradeToWebSocketHandlera">BNSHTTPShouldUpgradeToWebSocketHandler</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="../Typealiases.html#/s:3BNS16BNSStreamHandlera">BNSStreamHandler</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <div class="footer-wrapper">
+        <section id="footer">
+          <p>&copy; 2019 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2019-05-03)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </div>
+    </div>
+  </body>
+</div>
+</html>

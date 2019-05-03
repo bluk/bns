@@ -1,0 +1,5 @@
+xcodebuild_arguments: [CODE_SIGNING_ALLOWED=NO, "-scheme", "BNS-Package"]
+module: "BNS"
+module_version: latest
+theme: jony
+output: "docs/"

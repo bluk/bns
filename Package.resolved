@@ -1,0 +1,70 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "llbuild",
+        "repositoryURL": "https://github.com/apple/swift-llbuild.git",
+        "state": {
+          "branch": "master",
+          "revision": "d603a1641614065415d92af008fc60c1f1ea07ed",
+          "version": null
+        }
+      },
+      {
+        "package": "swift-log",
+        "repositoryURL": "https://github.com/apple/swift-log.git",
+        "state": {
+          "branch": null,
+          "revision": "a64dd7dafc06bcecc43ec4dff0d71ef797247456",
+          "version": "1.0.0"
+        }
+      },
+      {
+        "package": "swift-nio",
+        "repositoryURL": "https://github.com/apple/swift-nio.git",
+        "state": {
+          "branch": null,
+          "revision": "22d49070c556f9b9f741345938af9892473c9f13",
+          "version": "2.0.2"
+        }
+      },
+      {
+        "package": "swift-nio-extras",
+        "repositoryURL": "https://github.com/apple/swift-nio-extras.git",
+        "state": {
+          "branch": null,
+          "revision": "96e8335180ca61c7187efe47058a1c99eadaf265",
+          "version": "1.1.0"
+        }
+      },
+      {
+        "package": "swift-nio-http2",
+        "repositoryURL": "https://github.com/apple/swift-nio-http2.git",
+        "state": {
+          "branch": null,
+          "revision": "8752535dd21adac0a9c15ac2566a75dd804f0ebe",
+          "version": "1.2.0"
+        }
+      },
+      {
+        "package": "swift-nio-ssl",
+        "repositoryURL": "https://github.com/apple/swift-nio-ssl.git",
+        "state": {
+          "branch": null,
+          "revision": "f9ac0c3486f8e9333e791caf135e3fe067e0e66c",
+          "version": "2.0.2"
+        }
+      },
+      {
+        "package": "SwiftPM",
+        "repositoryURL": "https://github.com/apple/swift-package-manager",
+        "state": {
+          "branch": "swift-5.0-branch",
+          "revision": "3a57975e10be0b1a8b87992ddf3a49701036f96c",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}

@@ -1,0 +1,8 @@
+.circleci
+.git
+.github
+.build
+*.xcodeproj
+.*
+/Builds/
+/Deployments/

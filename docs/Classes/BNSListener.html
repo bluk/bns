@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>BNSListener Class Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+	<meta name="viewport" content="width=device-width, viewport-fit=cover, initial-scale=1.0" />
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Class/BNSListener" class="dashAnchor"></a>
+    <a title="BNSListener Class Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p>
+          <a href="../index.html">BNS Docs</a>
+          <span class="no-mobile"> (100% documented)</span>
+        </p>
+    
+    
+      </div>
+    </header>
+    <div id="breadcrumbs-container">
+      <div class="content-wrapper">
+        <p id="breadcrumbs">
+          <span class="no-mobile">
+            <a href="../index.html">BNS Reference</a>
+            <img id="carat" src="../img/carat.png" />
+          </span>
+          BNSListener Class Reference
+        </p>
+      </div>
+    </div>
+    <div class="wrapper">
+      <div class="article-wrapper">
+        <article class="main-content">
+          <section>
+            <section class="section">
+              <h1>BNSListener</h1>
+                <div class="declaration">
+                  <div class="language">
+                    <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="kt">BNSListener</span></code></pre>
+
+                  </div>
+                </div>
+              <p>A bootstrapped network server. It listens and accepts requests for standard web protocols.
+A listener should be created, the <code>bootstrapChannelHandler</code>, <code>stateUpdateHandler</code>,
+and <code>newConnectionHandler</code> should at least be set, and then the listener can be started.</p>
+
+            </section>
+            <section class="section task-group-section">
+              <div class="task-group">
+                <ul>
+                  <li class="item">
+                    <div>
+                      <code>
+                      <a name="/s:3BNS11BNSListenerC13configurationAC13ConfigurationVvp"></a>
+                      <a name="//apple_ref/swift/Property/configuration" class="dashAnchor"></a>
+                      <a class="token" href="#/s:3BNS11BNSListenerC13configurationAC13ConfigurationVvp">configuration</a>
+                      </code>
+                    </div>
+                    <div class="height-container">
+                      <div class="pointer-container"></div>
+                      <section class="section">
+                        <div class="pointer"></div>
+                        <div class="abstract">
+                          <p>The configuration</p>
+
+                        </div>
+                        <div class="declaration">
+                          <h4>Declaration</h4>
+                          <div class="language">
+                            <p class="aside-title">Swift</p>
+                            <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">configuration</span><span class="p">:</span> <span class="kt"><a href="../Classes/BNSListener/Configuration.html">Configuration</a></span></code></pre>
+
+                          </div>
+                        </div>
+                      </section>
+                    </div>
+                  </li>
+                  <li class="item">
+                    <div>
+                      <code>
+                      <a name="/s:3BNS11BNSListenerC5queueSo012OS_dispatch_C0CSgvp"></a>
+                      <a name="//apple_ref/swift/Property/queue" class="dashAnchor"></a>
+                      <a class="token" href="#/s:3BNS11BNSListenerC5queueSo012OS_dispatch_C0CSgvp">queue</a>
+                      </code>
+                    </div>
+                    <div class="height-container">
+                      <div class="pointer-container"></div>
+                      <section class="section">
+                        <div class="pointer"></div>
+                        <div class="abstract">
+                          <p>The queue where all the handler callbacks will be dispatched on.</p>
+
+                        </div>
+                        <div class="declaration">
+                          <h4>Declaration</h4>
+                          <div class="language">
+                            <p class="aside-title">Swift</p>
+                            <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">private(set)</span> <span class="k">var</span> <span class="nv">queue</span><span class="p">:</span> <span class="kt">DispatchQueue</span><span class="p">?</span></code></pre>
+
+                          </div>
+                        </div>
+                      </section>
+                    </div>
+                  </li>
+                  <li class="item">
+                    <div>
+                      <code>
+                      <a name="/s:3BNS11BNSListenerC5stateAC5StateOvp"></a>
+                      <a name="//apple_ref/swift/Property/state" class="dashAnchor"></a>
+                      <a class="token" href="#/s:3BNS11BNSListenerC5stateAC5StateOvp">state</a>
+                      </code>
+                    </div>
+                    <div class="height-container">
+                      <div class="pointer-container"></div>
+                      <section class="section">
+                        <div class="pointer"></div>
+                        <div class="abstract">
+                          <p>The current state of the instance. Must be accessed on the
+callback dispatch queue.</p>
+
+                        </div>
+                        <div class="declaration">
+                          <h4>Declaration</h4>
+                          <div class="language">
+                            <p class="aside-title">Swift</p>
+                            <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">internal(set)</span> <span class="k">var</span> <span class="nv">state</span><span class="p">:</span> <span class="kt">BNSListener</span><span class="o">.</span><span class="kt"><a href="../Classes/BNSListener/State.html">State</a></span></code></pre>
+
+                          </div>
+                        </div>
+                      </section>
+                    </div>
+                  </li>
+                  <li class="item">
+                    <div>
+                      <code>
+                      <a name="/s:3BNS11BNSListenerC18stateUpdateHandleryAC5StateOcSgvp"></a>
+                      <a name="//apple_ref/swift/Property/stateUpdateHandler" class="dashAnchor"></a>
+                      <a class="token" href="#/s:3BNS11BNSListenerC18stateUpdateHandleryAC5StateOcSgvp">stateUpdateHandler</a>
+                      </code>
+                    </div>
+                    <div class="height-container">
+                      <div class="pointer-container"></div>
+                      <section class="section">
+                        <div class="pointer"></div>
+                        <div class="abstract">
+                          <p>Handler for state changes. In general, the handler should listen to at least the <code>failed</code> state to
+transition and <code>cancel</code> the listener. The update to <code>cancelled</code> state can also be used as
+a way to cleanup any outstanding resources.</p>
+
+<p>An example for how to set this handler:</p>
+<pre class="highlight swift"><code><span class="n">listener</span><span class="o">.</span><span class="n">stateUpdateHandler</span> <span class="o">=</span> <span class="p">{</span> <span class="n">state</span> <span class="k">in</span>
+  <span class="k">switch</span> <span class="n">state</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="kd">let</span> <span class="o">.</span><span class="nf">failed</span><span class="p">(</span><span class="n">error</span><span class="p">):</span>
+      <span class="nf">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+      <span class="n">listener</span><span class="o">.</span><span class="nf">cancel</span><span class="p">()</span>
+    <span class="k">default</span><span class="p">:</span>
+      <span class="k">break</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+
+                        </div>
+                        <div class="declaration">
+                          <h4>Declaration</h4>
+                          <div class="language">
+                            <p class="aside-title">Swift</p>
+                            <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">stateUpdateHandler</span><span class="p">:</span> <span class="p">((</span><span class="kt">BNSListener</span><span class="o">.</span><span class="kt"><a href="../Classes/BNSListener/State.html">State</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span></code></pre>
+
+                          </div>
+                        </div>
+                      </section>
+                    </div>
+                  </li>
+                  <li class="item">
+                    <div>
+                      <code>
+                      <a name="/s:3BNS11BNSListenerC23bootstrapChannelHandler3NIO15EventLoopFutureCyAE0D0_pGAGyytGAeH_pccSgvp"></a>
+                      <a name="//apple_ref/swift/Property/bootstrapChannelHandler" class="dashAnchor"></a>
+                      <a class="token" href="#/s:3BNS11BNSListenerC23bootstrapChannelHandler3NIO15EventLoopFutureCyAE0D0_pGAGyytGAeH_pccSgvp">bootstrapChannelHandler</a>
+                      </code>
+                    </div>
+                    <div class="height-container">
+                      <div class="pointer-container"></div>
+                      <section class="section">
+                        <div class="pointer"></div>
+                        <div class="abstract">
+                          <p>Bootstraps the server listener. The handler is given a closure parameter to call in
+the <code>childChannelInitializer</code> for a ServerBootstrap.</p>
+
+<p>The handler is called after the <code>start(queue: DispatchQueue)</code> method is invoked.</p>
+
+<p>The caller is given the flexibility to set any server channel and child channel options desired or
+using a different NIO bootstrap method (such as using the NIOTransportServices).</p>
+
+<p>An example for how to set this handler:</p>
+<pre class="highlight swift"><code><span class="n">listener</span><span class="o">.</span><span class="n">bootstrapChannelHandler</span> <span class="o">=</span> <span class="p">{</span> <span class="n">childChannelInitializer</span> <span class="k">in</span>
+  <span class="k">return</span> <span class="kt">ServerBootstrap</span><span class="p">(</span><span class="nv">group</span><span class="p">:</span> <span class="n">eventLoopGroup</span><span class="p">)</span>
+    <span class="o">.</span><span class="nf">serverChannelOption</span><span class="p">(</span><span class="kt">ChannelOptions</span><span class="o">.</span><span class="n">backlog</span><span class="p">,</span> <span class="nv">value</span><span class="p">:</span> <span class="mi">256</span><span class="p">)</span>
+    <span class="o">.</span><span class="nf">serverChannelOption</span><span class="p">(</span><span class="kt">ChannelOptions</span><span class="o">.</span><span class="nf">socket</span><span class="p">(</span><span class="kt">SocketOptionLevel</span><span class="p">(</span><span class="kt">SOL_SOCKET</span><span class="p">),</span> <span class="kt">SO_REUSEADDR</span><span class="p">),</span> <span class="nv">value</span><span class="p">:</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">childChannelInitializer</span> <span class="p">{</span> <span class="n">channel</span> <span class="k">in</span>
+        <span class="nf">childChannelInitializer</span><span class="p">(</span><span class="n">channel</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="o">.</span><span class="nf">childChannelOption</span><span class="p">(</span><span class="kt">ChannelOptions</span><span class="o">.</span><span class="nf">socket</span><span class="p">(</span><span class="kt">IPPROTO_TCP</span><span class="p">,</span> <span class="kt">TCP_NODELAY</span><span class="p">),</span> <span class="nv">value</span><span class="p">:</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="o">.</span><span class="nf">childChannelOption</span><span class="p">(</span><span class="kt">ChannelOptions</span><span class="o">.</span><span class="nf">socket</span><span class="p">(</span><span class="kt">SocketOptionLevel</span><span class="p">(</span><span class="kt">SOL_SOCKET</span><span class="p">),</span> <span class="kt">SO_REUSEADDR</span><span class="p">),</span> <span class="nv">value</span><span class="p">:</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="o">.</span><span class="nf">childChannelOption</span><span class="p">(</span><span class="kt">ChannelOptions</span><span class="o">.</span><span class="n">maxMessagesPerRead</span><span class="p">,</span> <span class="nv">value</span><span class="p">:</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="o">.</span><span class="nf">bind</span><span class="p">(</span><span class="nv">host</span><span class="p">:</span> <span class="s">"127.0.0.1"</span><span class="p">,</span> <span class="nv">port</span><span class="p">:</span> <span class="mi">8080</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre>
+
+                        </div>
+                        <div class="declaration">
+                          <h4>Declaration</h4>
+                          <div class="language">
+                            <p class="aside-title">Swift</p>
+                            <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">bootstrapChannelHandler</span><span class="p">:</span> <span class="p">((</span><span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Channel</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">EventLoopFuture</span><span class="o">&lt;</span><span class="kt">Void</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">EventLoopFuture</span><span class="o">&lt;</span><span class="kt">Channel</span><span class="o">&gt;</span><span class="p">)?</span></code></pre>
+
+                          </div>
+                        </div>
+                      </section>
+                    </div>
+                  </li>
+                  <li class="item">
+                    <div>
+                      <code>
+                      <a name="/s:3BNS11BNSListenerC20newConnectionHandleryAA13BNSConnectionOcSgvp"></a>
+                      <a name="//apple_ref/swift/Property/newConnectionHandler" class="dashAnchor"></a>
+                      <a class="token" href="#/s:3BNS11BNSListenerC20newConnectionHandleryAA13BNSConnectionOcSgvp">newConnectionHandler</a>
+                      </code>
+                    </div>
+                    <div class="height-container">
+                      <div class="pointer-container"></div>
+                      <section class="section">
+                        <div class="pointer"></div>
+                        <div class="abstract">
+                          <p>Handler for new connections. Must be accessed on the callback dispatch queue. The connection&rsquo;s properties should
+be set and then the connection should be started.</p>
+<pre class="highlight swift"><code><span class="n">listener</span><span class="o">.</span><span class="n">newConnectionHandler</span> <span class="o">=</span> <span class="p">{</span> <span class="n">connection</span> <span class="k">in</span>
+  <span class="k">switch</span> <span class="n">connection</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="kd">let</span> <span class="o">.</span><span class="nf">http1</span><span class="p">(</span><span class="n">httpConection</span><span class="p">):</span>
+      <span class="n">httpConnection</span><span class="o">.</span><span class="n">stateUpdateHandler</span> <span class="o">=</span> <span class="o">...</span>
+      <span class="n">httpConnection</span><span class="o">.</span><span class="n">newStreamHandler</span> <span class="o">=</span> <span class="o">...</span>
+      <span class="n">httpConnection</span><span class="o">.</span><span class="nf">start</span><span class="p">()</span>
+    <span class="k">case</span> <span class="kd">let</span> <span class="o">.</span><span class="nf">http2</span><span class="p">(</span><span class="n">httpConection</span><span class="p">):</span>
+      <span class="n">httpConnection</span><span class="o">.</span><span class="n">stateUpdateHandler</span> <span class="o">=</span> <span class="o">...</span>
+      <span class="n">httpConnection</span><span class="o">.</span><span class="n">newStreamHandler</span> <span class="o">=</span> <span class="o">...</span>
+      <span class="n">httpConnection</span><span class="o">.</span><span class="nf">start</span><span class="p">()</span>
+    <span class="k">case</span> <span class="o">.</span><span class="nv">webSocket</span><span class="p">:</span>
+      <span class="k">break</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+
+                        </div>
+                        <div class="declaration">
+                          <h4>Declaration</h4>
+                          <div class="language">
+                            <p class="aside-title">Swift</p>
+                            <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">newConnectionHandler</span><span class="p">:</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:3BNS20BNSConnectionHandlera">BNSConnectionHandler</a></span><span class="p">)?</span></code></pre>
+
+                          </div>
+                        </div>
+                      </section>
+                    </div>
+                  </li>
+                  <li class="item">
+                    <div>
+                      <code>
+                      <a name="/s:3BNS11BNSListenerC6logger7Logging6LoggerVSgvp"></a>
+                      <a name="//apple_ref/swift/Property/logger" class="dashAnchor"></a>
+                      <a class="token" href="#/s:3BNS11BNSListenerC6logger7Logging6LoggerVSgvp">logger</a>
+                      </code>
+                    </div>
+                    <div class="height-container">
+                      <div class="pointer-container"></div>
+                      <section class="section">
+                        <div class="pointer"></div>
+                        <div class="abstract">
+                          <p>The logger to use. Must be accessed on the callback dispatch queue.</p>
+
+                        </div>
+                        <div class="declaration">
+                          <h4>Declaration</h4>
+                          <div class="language">
+                            <p class="aside-title">Swift</p>
+                            <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">logger</span><span class="p">:</span> <span class="kt">Logger</span><span class="p">?</span></code></pre>
+
+                          </div>
+                        </div>
+                      </section>
+                    </div>
+                  </li>
+                  <li class="item">
+                    <div>
+                      <code>
+                      <a name="/s:3BNS11BNSListenerC7channel3NIO7Channel_pSgvp"></a>
+                      <a name="//apple_ref/swift/Property/channel" class="dashAnchor"></a>
+                      <a class="token" href="#/s:3BNS11BNSListenerC7channel3NIO7Channel_pSgvp">channel</a>
+                      </code>
+                    </div>
+                    <div class="height-container">
+                      <div class="pointer-container"></div>
+                      <section class="section">
+                        <div class="pointer"></div>
+                        <div class="abstract">
+                          <p>The channel for the listener. Must be accessed on the callback dispatch queue.</p>
+
+                        </div>
+                        <div class="declaration">
+                          <h4>Declaration</h4>
+                          <div class="language">
+                            <p class="aside-title">Swift</p>
+                            <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">private(set)</span> <span class="k">var</span> <span class="nv">channel</span><span class="p">:</span> <span class="kt">Channel</span><span class="p">?</span></code></pre>
+
+                          </div>
+                        </div>
+                      </section>
+                    </div>
+                  </li>
+                  <li class="item">
+                    <div>
+                      <code>
+                      <a name="/s:3BNS11BNSListenerC13configurationA2C13ConfigurationV_tcfc"></a>
+                      <a name="//apple_ref/swift/Method/init(configuration:)" class="dashAnchor"></a>
+                      <a class="token" href="#/s:3BNS11BNSListenerC13configurationA2C13ConfigurationV_tcfc">init(configuration:)</a>
+                      </code>
+                    </div>
+                    <div class="height-container">
+                      <div class="pointer-container"></div>
+                      <section class="section">
+                        <div class="pointer"></div>
+                        <div class="abstract">
+                          <p>Designated initializer.</p>
+
+                        </div>
+                        <div class="declaration">
+                          <h4>Declaration</h4>
+                          <div class="language">
+                            <p class="aside-title">Swift</p>
+                            <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">configuration</span><span class="p">:</span> <span class="kt"><a href="../Classes/BNSListener/Configuration.html">Configuration</a></span><span class="p">)</span></code></pre>
+
+                          </div>
+                        </div>
+                        <div>
+                          <h4>Parameters</h4>
+                          <table class="graybox">
+                            <tbody>
+                              <tr>
+                                <td>
+                                  <code>
+                                  <em>configuration</em>
+                                  </code>
+                                </td>
+                                <td>
+                                  <div>
+                                    <p>The listener&rsquo;s configuration.</p>
+                                  </div>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </section>
+                    </div>
+                  </li>
+                  <li class="item">
+                    <div>
+                      <code>
+                      <a name="/s:3BNS11BNSListenerC5start5queueySo012OS_dispatch_D0C_tF"></a>
+                      <a name="//apple_ref/swift/Method/start(queue:)" class="dashAnchor"></a>
+                      <a class="token" href="#/s:3BNS11BNSListenerC5start5queueySo012OS_dispatch_D0C_tF">start(queue:)</a>
+                      </code>
+                    </div>
+                    <div class="height-container">
+                      <div class="pointer-container"></div>
+                      <section class="section">
+                        <div class="pointer"></div>
+                        <div class="abstract">
+                          <p>Starts the listener. The listener should have its handlers and other options set before
+invoking this method. The <code><a href="../Classes/BNSListener.html#/s:3BNS11BNSListenerC18stateUpdateHandleryAC5StateOcSgvp">stateUpdateHandler</a></code> will be notified when the listener
+is ready to process connections.</p>
+
+                        </div>
+                        <div class="declaration">
+                          <h4>Declaration</h4>
+                          <div class="language">
+                            <p class="aside-title">Swift</p>
+                            <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">final</span> <span class="kd">func</span> <span class="nf">start</span><span class="p">(</span><span class="nv">queue</span><span class="p">:</span> <span class="kt">DispatchQueue</span><span class="p">)</span></code></pre>
+
+                          </div>
+                        </div>
+                        <div>
+                          <h4>Parameters</h4>
+                          <table class="graybox">
+                            <tbody>
+                              <tr>
+                                <td>
+                                  <code>
+                                  <em>queue</em>
+                                  </code>
+                                </td>
+                                <td>
+                                  <div>
+                                    <p>The queue to use for callbacks.</p>
+                                  </div>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </section>
+                    </div>
+                  </li>
+                  <li class="item">
+                    <div>
+                      <code>
+                      <a name="/s:3BNS11BNSListenerC6cancelyyF"></a>
+                      <a name="//apple_ref/swift/Method/cancel()" class="dashAnchor"></a>
+                      <a class="token" href="#/s:3BNS11BNSListenerC6cancelyyF">cancel()</a>
+                      </code>
+                    </div>
+                    <div class="height-container">
+                      <div class="pointer-container"></div>
+                      <section class="section">
+                        <div class="pointer"></div>
+                        <div class="abstract">
+                          <p>Asks to cancel the listener and attempts to stop processing.</p>
+
+<p>The listener is completely cancelled when the state changes in the <code><a href="../Classes/BNSListener.html#/s:3BNS11BNSListenerC18stateUpdateHandleryAC5StateOcSgvp">stateUpdateHandler</a></code>.</p>
+
+                        </div>
+                        <div class="declaration">
+                          <h4>Declaration</h4>
+                          <div class="language">
+                            <p class="aside-title">Swift</p>
+                            <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">final</span> <span class="kd">func</span> <span class="nf">cancel</span><span class="p">()</span></code></pre>
+
+                          </div>
+                        </div>
+                      </section>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              <div class="task-group">
+                <ul>
+                  <li class="item">
+                    <div>
+                      <code>
+                      <a name="/s:3BNS11BNSListenerC13ConfigurationV"></a>
+                      <a name="//apple_ref/swift/Struct/Configuration" class="dashAnchor"></a>
+                      <a class="token" href="#/s:3BNS11BNSListenerC13ConfigurationV">Configuration</a>
+                      </code>
+                    </div>
+                    <div class="height-container">
+                      <div class="pointer-container"></div>
+                      <section class="section">
+                        <div class="pointer"></div>
+                        <div class="abstract">
+                          <p>Configuration which the listener requires.</p>
+
+                          <a href="../Classes/BNSListener/Configuration.html" class="slightly-smaller">See more</a>
+                        </div>
+                        <div class="declaration">
+                          <h4>Declaration</h4>
+                          <div class="language">
+                            <p class="aside-title">Swift</p>
+                            <pre class="highlight swift"><code><span class="kd">struct</span> <span class="kt">Configuration</span></code></pre>
+
+                          </div>
+                        </div>
+                      </section>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              <div class="task-group">
+                <ul>
+                  <li class="item">
+                    <div>
+                      <code>
+                      <a name="/s:3BNS11BNSListenerC14FeatureOptionsV"></a>
+                      <a name="//apple_ref/swift/Struct/FeatureOptions" class="dashAnchor"></a>
+                      <a class="token" href="#/s:3BNS11BNSListenerC14FeatureOptionsV">FeatureOptions</a>
+                      </code>
+                    </div>
+                    <div class="height-container">
+                      <div class="pointer-container"></div>
+                      <section class="section">
+                        <div class="pointer"></div>
+                        <div class="abstract">
+                          <p>The various features to enable for the BNSListener.</p>
+
+                          <a href="../Classes/BNSListener/FeatureOptions.html" class="slightly-smaller">See more</a>
+                        </div>
+                        <div class="declaration">
+                          <h4>Declaration</h4>
+                          <div class="language">
+                            <p class="aside-title">Swift</p>
+                            <pre class="highlight swift"><code><span class="kd">struct</span> <span class="kt">FeatureOptions</span> <span class="p">:</span> <span class="kt">OptionSet</span></code></pre>
+
+                          </div>
+                        </div>
+                      </section>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              <div class="task-group">
+                <ul>
+                  <li class="item">
+                    <div>
+                      <code>
+                      <a name="/s:3BNS11BNSListenerC22ProtocolSupportOptionsV"></a>
+                      <a name="//apple_ref/swift/Struct/ProtocolSupportOptions" class="dashAnchor"></a>
+                      <a class="token" href="#/s:3BNS11BNSListenerC22ProtocolSupportOptionsV">ProtocolSupportOptions</a>
+                      </code>
+                    </div>
+                    <div class="height-container">
+                      <div class="pointer-container"></div>
+                      <section class="section">
+                        <div class="pointer"></div>
+                        <div class="abstract">
+                          <p>The protocols to support.</p>
+
+                          <a href="../Classes/BNSListener/ProtocolSupportOptions.html" class="slightly-smaller">See more</a>
+                        </div>
+                        <div class="declaration">
+                          <h4>Declaration</h4>
+                          <div class="language">
+                            <p class="aside-title">Swift</p>
+                            <pre class="highlight swift"><code><span class="kd">struct</span> <span class="kt">ProtocolSupportOptions</span> <span class="p">:</span> <span class="kt">OptionSet</span></code></pre>
+
+                          </div>
+                        </div>
+                      </section>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              <div class="task-group">
+                <ul>
+                  <li class="item">
+                    <div>
+                      <code>
+                      <a name="/s:3BNS11BNSListenerC5StateO"></a>
+                      <a name="//apple_ref/swift/Enum/State" class="dashAnchor"></a>
+                      <a class="token" href="#/s:3BNS11BNSListenerC5StateO">State</a>
+                      </code>
+                    </div>
+                    <div class="height-container">
+                      <div class="pointer-container"></div>
+                      <section class="section">
+                        <div class="pointer"></div>
+                        <div class="abstract">
+                          <p>The state of the listener</p>
+
+                          <a href="../Classes/BNSListener/State.html" class="slightly-smaller">See more</a>
+                        </div>
+                        <div class="declaration">
+                          <h4>Declaration</h4>
+                          <div class="language">
+                            <p class="aside-title">Swift</p>
+                            <pre class="highlight swift"><code><span class="kd">enum</span> <span class="kt">State</span></code></pre>
+
+                          </div>
+                        </div>
+                      </section>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </section>
+          </section>
+        </article>
+      </div>
+      <div class="nav-wrapper">
+        <nav class="nav-bottom">
+          <ul class="nav-groups">
+            <li class="nav-group-name">
+              <a href="../Classes.html">Classes</a>
+              <ul class="nav-group-tasks">
+                <li class="nav-group-task">
+                  <a href="../Classes/BNSHTTP1Connection.html">BNSHTTP1Connection</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="../Classes/BNSHTTP1Stream.html">BNSHTTP1Stream</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="../Classes/BNSHTTP2Connection.html">BNSHTTP2Connection</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="../Classes/BNSHTTP2Stream.html">BNSHTTP2Stream</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="../Classes/BNSListener.html">BNSListener</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="../Classes/BNSListener/Configuration.html">– Configuration</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="../Classes/BNSListener/FeatureOptions.html">– FeatureOptions</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="../Classes/BNSListener/ProtocolSupportOptions.html">– ProtocolSupportOptions</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="../Classes/BNSListener/State.html">– State</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="../Classes/BNSStreamContentContext.html">BNSStreamContentContext</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="../Classes/BNSWebSocketConnection.html">BNSWebSocketConnection</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="../Classes/BNSWebSocketStream.html">BNSWebSocketStream</a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-group-name">
+              <a href="../Global Variables.html">Global Variables</a>
+              <ul class="nav-group-tasks">
+                <li class="nav-group-task">
+                  <a href="../Global Variables.html#/s:3BNS23BNSDefaultCallbackQueueSo17OS_dispatch_queueCvp">BNSDefaultCallbackQueue</a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-group-name">
+              <a href="../Enums.html">Enumerations</a>
+              <ul class="nav-group-tasks">
+                <li class="nav-group-task">
+                  <a href="../Enums/BNSChannelHandlerName.html">BNSChannelHandlerName</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="../Enums/BNSConnection.html">BNSConnection</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="../Enums/BNSConnectionError.html">BNSConnectionError</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="../Enums/BNSConnectionState.html">BNSConnectionState</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="../Enums/BNSListenerError.html">BNSListenerError</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="../Enums/BNSStream.html">BNSStream</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="../Enums/BNSStreamError.html">BNSStreamError</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="../Enums/BNSStreamSendCompletion.html">BNSStreamSendCompletion</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="../Enums/BNSStreamState.html">BNSStreamState</a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-group-name">
+              <a href="../Protocols.html">Protocols</a>
+              <ul class="nav-group-tasks">
+                <li class="nav-group-task">
+                  <a href="../Protocols/BNSBaseConnection.html">BNSBaseConnection</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="../Protocols/BNSBaseStream.html">BNSBaseStream</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="../Protocols.html#/s:3BNS17BNSHTTPConnectionP">BNSHTTPConnection</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="../Protocols/BNSHTTPStream.html">BNSHTTPStream</a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-group-name">
+              <a href="../Typealiases.html">Type Aliases</a>
+              <ul class="nav-group-tasks">
+                <li class="nav-group-task">
+                  <a href="../Typealiases.html#/s:3BNS20BNSConnectionHandlera">BNSConnectionHandler</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="../Typealiases.html#/s:3BNS38BNSHTTPShouldUpgradeToWebSocketHandlera">BNSHTTPShouldUpgradeToWebSocketHandler</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="../Typealiases.html#/s:3BNS16BNSStreamHandlera">BNSStreamHandler</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <div class="footer-wrapper">
+        <section id="footer">
+          <p>&copy; 2019 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2019-05-03)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </div>
+    </div>
+  </body>
+</div>
+</html>

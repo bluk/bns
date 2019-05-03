@@ -1,0 +1,187 @@
+{
+  "warnings": [
+    {
+      "file": "/Users/bryantluk/Code/monorepo/bns/Sources/BNS/Listener/ChannelHandlers/BNSChannelHandlerName.swift",
+      "line": 17,
+      "symbol": "BNSChannelHandlerName.backPressureHandler",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/bryantluk/Code/monorepo/bns/Sources/BNS/Listener/ChannelHandlers/BNSChannelHandlerName.swift",
+      "line": 18,
+      "symbol": "BNSChannelHandlerName.idleStateHandler",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/bryantluk/Code/monorepo/bns/Sources/BNS/Listener/ChannelHandlers/BNSChannelHandlerName.swift",
+      "line": 19,
+      "symbol": "BNSChannelHandlerName.listenerErrorCaughtHandler",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/bryantluk/Code/monorepo/bns/Sources/BNS/Listener/ChannelHandlers/BNSChannelHandlerName.swift",
+      "line": 21,
+      "symbol": "BNSChannelHandlerName.nioSSLServerHandler",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/bryantluk/Code/monorepo/bns/Sources/BNS/Listener/ChannelHandlers/BNSChannelHandlerName.swift",
+      "line": 23,
+      "symbol": "BNSChannelHandlerName.httpResponseEncoder",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/bryantluk/Code/monorepo/bns/Sources/BNS/Listener/ChannelHandlers/BNSChannelHandlerName.swift",
+      "line": 24,
+      "symbol": "BNSChannelHandlerName.byteToMessageHandler",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/bryantluk/Code/monorepo/bns/Sources/BNS/Listener/ChannelHandlers/BNSChannelHandlerName.swift",
+      "line": 25,
+      "symbol": "BNSChannelHandlerName.bnsHTTP1ConnectionChannelHandler",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/bryantluk/Code/monorepo/bns/Sources/BNS/Listener/ChannelHandlers/BNSChannelHandlerName.swift",
+      "line": 26,
+      "symbol": "BNSChannelHandlerName.bnsHTTP1ConnectionBufferChannelHandler",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/bryantluk/Code/monorepo/bns/Sources/BNS/Listener/ChannelHandlers/BNSChannelHandlerName.swift",
+      "line": 27,
+      "symbol": "BNSChannelHandlerName.httpServerPipelineHandler",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/bryantluk/Code/monorepo/bns/Sources/BNS/Listener/ChannelHandlers/BNSChannelHandlerName.swift",
+      "line": 28,
+      "symbol": "BNSChannelHandlerName.httpResponseCompressor",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/bryantluk/Code/monorepo/bns/Sources/BNS/Listener/ChannelHandlers/BNSChannelHandlerName.swift",
+      "line": 29,
+      "symbol": "BNSChannelHandlerName.httpServerProtocolErrorHandler",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/bryantluk/Code/monorepo/bns/Sources/BNS/Listener/ChannelHandlers/BNSChannelHandlerName.swift",
+      "line": 30,
+      "symbol": "BNSChannelHandlerName.httpServerUpgradeHandler",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/bryantluk/Code/monorepo/bns/Sources/BNS/Listener/ChannelHandlers/BNSChannelHandlerName.swift",
+      "line": 31,
+      "symbol": "BNSChannelHandlerName.bnsHTTP1StreamChannelHandler",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/bryantluk/Code/monorepo/bns/Sources/BNS/Listener/ChannelHandlers/BNSChannelHandlerName.swift",
+      "line": 33,
+      "symbol": "BNSChannelHandlerName.nioHTTP2Handler",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/bryantluk/Code/monorepo/bns/Sources/BNS/Listener/ChannelHandlers/BNSChannelHandlerName.swift",
+      "line": 34,
+      "symbol": "BNSChannelHandlerName.bnsHTTP2ConnectionChannelHandler",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/bryantluk/Code/monorepo/bns/Sources/BNS/Listener/ChannelHandlers/BNSChannelHandlerName.swift",
+      "line": 35,
+      "symbol": "BNSChannelHandlerName.bnsHTTP2ConnectionBufferChannelHandler",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/bryantluk/Code/monorepo/bns/Sources/BNS/Listener/ChannelHandlers/BNSChannelHandlerName.swift",
+      "line": 36,
+      "symbol": "BNSChannelHandlerName.http2StreamMultiplexer",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/bryantluk/Code/monorepo/bns/Sources/BNS/Listener/ChannelHandlers/BNSChannelHandlerName.swift",
+      "line": 38,
+      "symbol": "BNSChannelHandlerName.http2ToHTTP1ServerCodec",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/bryantluk/Code/monorepo/bns/Sources/BNS/Listener/ChannelHandlers/BNSChannelHandlerName.swift",
+      "line": 39,
+      "symbol": "BNSChannelHandlerName.bnsHTTP2StreamChannelHandler",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/bryantluk/Code/monorepo/bns/Sources/BNS/Listener/ChannelHandlers/BNSChannelHandlerName.swift",
+      "line": 40,
+      "symbol": "BNSChannelHandlerName.bnsHTTP2CreatedStreamChannelHandler",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/bryantluk/Code/monorepo/bns/Sources/BNS/Listener/ChannelHandlers/BNSChannelHandlerName.swift",
+      "line": 42,
+      "symbol": "BNSChannelHandlerName.bnsWebSocketConnectionChannelHandler",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/bryantluk/Code/monorepo/bns/Sources/BNS/Listener/ChannelHandlers/BNSChannelHandlerName.swift",
+      "line": 43,
+      "symbol": "BNSChannelHandlerName.bnsWebSocketStreamChannelHandler",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/bryantluk/Code/monorepo/bns/Sources/BNS/Listener/ChannelHandlers/BNSChannelHandlerName.swift",
+      "line": 44,
+      "symbol": "BNSChannelHandlerName.bnsWSConnectionBufferChannelHandler",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/bryantluk/Code/monorepo/bns/Sources/BNS/Streams/BNSHTTP1Stream.swift",
+      "line": 104,
+      "symbol": "BNSHTTP1Stream.wasResponseHeadWritten",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/bryantluk/Code/monorepo/bns/Sources/BNS/Streams/BNSHTTP2Stream.swift",
+      "line": 142,
+      "symbol": "BNSHTTP2Stream.wasResponseHeadWritten",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/bryantluk/Code/monorepo/bns/Sources/BNS/Streams/BNSHTTPStream.swift",
+      "line": 31,
+      "symbol": "BNSHTTPStream.wasResponseHeadWritten",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    }
+  ],
+  "source_directory": "/Users/bryantluk/Code/monorepo/bns"
+}
