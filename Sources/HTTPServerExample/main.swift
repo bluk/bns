@@ -188,7 +188,11 @@ listener.newConnectionHandler = { connectionType in
 }
 
 private let fullyShutdownPromise: EventLoopPromise<Void> = eventLoopGroup.next().makePromise()
-private var signalSource: DispatchSourceSignal = trap(signal: SIGINT) { [weak listener] _ in
+private var intSignalSource: DispatchSourceSignal = trap(signal: SIGINT) { [weak listener] _ in
+    listener?.cancel()
+}
+
+private var termSignalSource: DispatchSourceSignal = trap(signal: SIGTERM) { [weak listener] _ in
     fullyShutdownPromise.futureResult.whenComplete { _ in
         listener?.cancel()
     }
@@ -200,4 +204,5 @@ dispatchGroup.enter()
 listener.start(queue: DispatchQueue(label: "ListenerQueue"))
 
 dispatchGroup.wait()
-signalSource.cancel()
+intSignalSource.cancel()
+termSignalSource.cancel()
