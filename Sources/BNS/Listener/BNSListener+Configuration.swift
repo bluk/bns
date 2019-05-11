@@ -41,9 +41,13 @@ public extension BNSListener {
         /// The maximum number of bytes which should be buffered before a connection is started.
         /// If the number of bytes buffered is greater than the maximum, the underlying channel is
         /// closed.
-        /// After the connection is started, it is up to the application to determine
-        /// if the request body is too large.
+        /// Once the connection is started, this option does not affect the connection.
+        /// See `maxBufferSizeForDecode` for a maximum request size while decoding a message.
         public let maxBufferSizeBeforeConnectionStart: Int?
+
+        /// The maximum number of bytes which should be buffered while decoding a message.
+        /// Currently only affects HTTP1 connections.
+        public let maxBufferSizeForDecode: Int?
 
         /// The HTTP2 connection settings
         public let http2Settings: [HTTP2Setting]
@@ -57,6 +61,7 @@ public extension BNSListener {
             writeTimeout: TimeAmount? = nil,
             allTimeout: TimeAmount? = TimeAmount.minutes(1),
             maxBufferSizeBeforeConnectionStart: Int? = nil,
+            maxBufferSizeForDecode: Int? = nil,
             http2Settings: [HTTP2Setting] = [
                 HTTP2Setting(parameter: .maxConcurrentStreams, value: 100),
                 HTTP2Setting(parameter: .maxHeaderListSize, value: 1 << 16),
@@ -77,6 +82,7 @@ public extension BNSListener {
             self.writeTimeout = writeTimeout
             self.allTimeout = allTimeout
             self.maxBufferSizeBeforeConnectionStart = maxBufferSizeBeforeConnectionStart
+            self.maxBufferSizeForDecode = maxBufferSizeForDecode
             self.http2Settings = http2Settings
         }
     }

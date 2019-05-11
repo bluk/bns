@@ -102,7 +102,10 @@ internal extension ChannelPipeline {
                     context.configuration.protocolSupportOptions.contains(.webSocket)
                         ? .forwardBytes : .dropBytes
                 )
-                let byteToMessageHandler = ByteToMessageHandler(requestDecoder)
+                let byteToMessageHandler = ByteToMessageHandler(
+                    requestDecoder,
+                    maximumBufferSize: context.configuration.maxBufferSizeForDecode
+                )
                 handlersToRemoveOnUpgrade.append(byteToMessageHandler)
                 return self.addHandler(byteToMessageHandler, name: BNSChannelHandlerName.byteToMessageHandler.rawValue)
             }
