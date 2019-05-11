@@ -168,7 +168,7 @@ internal extension ChannelPipeline {
             .flatMap { _ -> EventLoopFuture<Void> in
                 let upgradeFuture: EventLoopFuture<Void>
                 if context.configuration.protocolSupportOptions.contains(.webSocket) {
-                    let webSocketUpgrader = WebSocketUpgrader(
+                    let webSocketUpgrader = NIOWebSocketServerUpgrader(
                         shouldUpgrade: { [weak http1Connection] (channel: Channel, requestHead: HTTPRequestHead) in
                             let promise: EventLoopPromise<HTTPHeaders?>
                                 = channel.eventLoop.makePromise()
