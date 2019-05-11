@@ -230,8 +230,8 @@
                           <p>The maximum number of bytes which should be buffered before a connection is started.
 If the number of bytes buffered is greater than the maximum, the underlying channel is
 closed.
-After the connection is started, it is up to the application to determine
-if the request body is too large.</p>
+Once the connection is started, this option does not affect the connection.
+See <code><a href="../../Classes/BNSListener/Configuration.html#/s:3BNS11BNSListenerC13ConfigurationV22maxBufferSizeForDecodeSiSgvp">maxBufferSizeForDecode</a></code> for a maximum request size while decoding a message.</p>
 
                         </div>
                         <div class="declaration">
@@ -239,6 +239,34 @@ if the request body is too large.</p>
                           <div class="language">
                             <p class="aside-title">Swift</p>
                             <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">maxBufferSizeBeforeConnectionStart</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span></code></pre>
+
+                          </div>
+                        </div>
+                      </section>
+                    </div>
+                  </li>
+                  <li class="item">
+                    <div>
+                      <code>
+                      <a name="/s:3BNS11BNSListenerC13ConfigurationV22maxBufferSizeForDecodeSiSgvp"></a>
+                      <a name="//apple_ref/swift/Property/maxBufferSizeForDecode" class="dashAnchor"></a>
+                      <a class="token" href="#/s:3BNS11BNSListenerC13ConfigurationV22maxBufferSizeForDecodeSiSgvp">maxBufferSizeForDecode</a>
+                      </code>
+                    </div>
+                    <div class="height-container">
+                      <div class="pointer-container"></div>
+                      <section class="section">
+                        <div class="pointer"></div>
+                        <div class="abstract">
+                          <p>The maximum number of bytes which should be buffered while decoding a message.
+Currently only affects HTTP1 connections.</p>
+
+                        </div>
+                        <div class="declaration">
+                          <h4>Declaration</h4>
+                          <div class="language">
+                            <p class="aside-title">Swift</p>
+                            <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">maxBufferSizeForDecode</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span></code></pre>
 
                           </div>
                         </div>
@@ -275,9 +303,9 @@ if the request body is too large.</p>
                   <li class="item">
                     <div>
                       <code>
-                      <a name="/s:3BNS11BNSListenerC13ConfigurationV22protocolSupportOptions07featureF003tlsC011readTimeout05writeJ003allJ034maxBufferSizeBeforeConnectionStart13http2SettingsAeC08ProtocoleF0V_AC07FeatureF0V6NIOSSL16TLSConfigurationVSg3NIO10TimeAmountVSgA2YSiSgSay8NIOHTTP212HTTP2SettingVGtcfc"></a>
-                      <a name="//apple_ref/swift/Method/init(protocolSupportOptions:featureOptions:tlsConfiguration:readTimeout:writeTimeout:allTimeout:maxBufferSizeBeforeConnectionStart:http2Settings:)" class="dashAnchor"></a>
-                      <a class="token" href="#/s:3BNS11BNSListenerC13ConfigurationV22protocolSupportOptions07featureF003tlsC011readTimeout05writeJ003allJ034maxBufferSizeBeforeConnectionStart13http2SettingsAeC08ProtocoleF0V_AC07FeatureF0V6NIOSSL16TLSConfigurationVSg3NIO10TimeAmountVSgA2YSiSgSay8NIOHTTP212HTTP2SettingVGtcfc">init(protocolSupportOptions:featureOptions:tlsConfiguration:readTimeout:writeTimeout:allTimeout:maxBufferSizeBeforeConnectionStart:http2Settings:)</a>
+                      <a name="/s:3BNS11BNSListenerC13ConfigurationV22protocolSupportOptions07featureF003tlsC011readTimeout05writeJ003allJ034maxBufferSizeBeforeConnectionStart0mnO9ForDecode13http2SettingsAeC08ProtocoleF0V_AC07FeatureF0V6NIOSSL16TLSConfigurationVSg3NIO10TimeAmountVSgA2ZSiSgA_Say8NIOHTTP212HTTP2SettingVGtcfc"></a>
+                      <a name="//apple_ref/swift/Method/init(protocolSupportOptions:featureOptions:tlsConfiguration:readTimeout:writeTimeout:allTimeout:maxBufferSizeBeforeConnectionStart:maxBufferSizeForDecode:http2Settings:)" class="dashAnchor"></a>
+                      <a class="token" href="#/s:3BNS11BNSListenerC13ConfigurationV22protocolSupportOptions07featureF003tlsC011readTimeout05writeJ003allJ034maxBufferSizeBeforeConnectionStart0mnO9ForDecode13http2SettingsAeC08ProtocoleF0V_AC07FeatureF0V6NIOSSL16TLSConfigurationVSg3NIO10TimeAmountVSgA2ZSiSgA_Say8NIOHTTP212HTTP2SettingVGtcfc">init(protocolSupportOptions:featureOptions:tlsConfiguration:readTimeout:writeTimeout:allTimeout:maxBufferSizeBeforeConnectionStart:maxBufferSizeForDecode:http2Settings:)</a>
                       </code>
                     </div>
                     <div class="height-container">
@@ -300,6 +328,7 @@ if the request body is too large.</p>
     <span class="nv">writeTimeout</span><span class="p">:</span> <span class="kt">TimeAmount</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">allTimeout</span><span class="p">:</span> <span class="kt">TimeAmount</span><span class="p">?</span> <span class="o">=</span> <span class="kt">TimeAmount</span><span class="o">.</span><span class="nf">minutes</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span>
     <span class="nv">maxBufferSizeBeforeConnectionStart</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">maxBufferSizeForDecode</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">http2Settings</span><span class="p">:</span> <span class="p">[</span><span class="kt">HTTP2Setting</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
         <span class="kt">HTTP2Setting</span><span class="p">(</span><span class="nv">parameter</span><span class="p">:</span> <span class="o">.</span><span class="n">maxConcurrentStreams</span><span class="p">,</span> <span class="nv">value</span><span class="p">:</span> <span class="mi">100</span><span class="p">),</span>
         <span class="kt">HTTP2Setting</span><span class="p">(</span><span class="nv">parameter</span><span class="p">:</span> <span class="o">.</span><span class="n">maxHeaderListSize</span><span class="p">,</span> <span class="nv">value</span><span class="p">:</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">16</span><span class="p">),</span>
@@ -437,7 +466,7 @@ if the request body is too large.</p>
       </div>
       <div class="footer-wrapper">
         <section id="footer">
-          <p>&copy; 2019 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2019-05-03)</p>
+          <p>&copy; 2019 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2019-05-11)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </div>
