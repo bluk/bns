@@ -18,8 +18,8 @@ public enum BNSChannelHandlerName: String, CaseIterable {
     case backPressureHandler = "BNSBackPressureHandler"
     /// IdleStateHandler used
     case idleStateHandler = "BNSIdleStateHandler"
-    /// The various listener error caught handlers added to close the channel on caught errors
-    case listenerErrorCaughtHandler = "BNSListenerErrorCaughtHandler"
+    /// NIOCloseOnErrorHandler used
+    case nioCloseOnErrorHandler = "BNSNIOCloseOnErrorHandler"
 
     /// NIOSSLServerHandler used
     case nioSSLServerHandler = "BNSNIOSSLServerHandler"

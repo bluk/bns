@@ -98,11 +98,8 @@ internal extension ChannelPipeline {
                         }
                         .flatMap { () -> EventLoopFuture<Void> in
                             streamChannel.pipeline.addHandler(
-                                BNSListenerErrorCaughtHandler(
-                                    queue: context.queue,
-                                    logger: context.logger
-                                ),
-                                name: BNSChannelHandlerName.listenerErrorCaughtHandler.rawValue
+                                NIOCloseOnErrorHandler(),
+                                name: BNSChannelHandlerName.nioCloseOnErrorHandler.rawValue
                             )
                         }
 

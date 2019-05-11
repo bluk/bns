@@ -135,7 +135,6 @@ public final class BNSHTTP2Connection: BNSHTTPConnection,
             preconditionFailure("Multiplexer should already have been set before any caller could invoke createStream")
         }
 
-        let eventLoopProtectedLogger = self.eventLoopProtectedLogger
         multiplexer.createStreamChannel(promise: promise) { streamChannel, streamID in
             streamChannel.pipeline.addHandler(
                 HTTP2ToHTTP1ServerCodec(streamID: streamID),
@@ -161,11 +160,8 @@ public final class BNSHTTP2Connection: BNSHTTPConnection,
             }
             .flatMap { () -> EventLoopFuture<Void> in
                 streamChannel.pipeline.addHandler(
-                    BNSListenerErrorCaughtHandler(
-                        queue: self.queue ?? BNSDefaultCallbackQueue,
-                        logger: eventLoopProtectedLogger
-                    ),
-                    name: BNSChannelHandlerName.listenerErrorCaughtHandler.rawValue
+                    NIOCloseOnErrorHandler(),
+                    name: BNSChannelHandlerName.nioCloseOnErrorHandler.rawValue
                 )
             }
         }
