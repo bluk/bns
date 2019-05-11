@@ -6,7 +6,7 @@
         "repositoryURL": "https://github.com/apple/swift-llbuild.git",
         "state": {
           "branch": "master",
-          "revision": "d603a1641614065415d92af008fc60c1f1ea07ed",
+          "revision": "3aaff32283b6968473f740559b6183d149dbfa36",
           "version": null
         }
       },
@@ -24,8 +24,8 @@
         "repositoryURL": "https://github.com/apple/swift-nio.git",
         "state": {
           "branch": null,
-          "revision": "22d49070c556f9b9f741345938af9892473c9f13",
-          "version": "2.0.2"
+          "revision": "0e37ada7cc6b68452716d706849b6868a2a77429",
+          "version": "2.1.0"
         }
       },
       {
