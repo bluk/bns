@@ -10,11 +10,11 @@ public let package = Package(
         .library(name: "BNS", targets: ["BNS"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/apple/swift-nio.git", from: "2.1.0"),
-        .package(url: "https://github.com/apple/swift-nio-ssl.git", from: "2.0.2"),
-        .package(url: "https://github.com/apple/swift-nio-http2.git", from: "1.0.0"),
-        .package(url: "https://github.com/apple/swift-nio-extras.git", from: "1.0.0"),
-        .package(url: "https://github.com/apple/swift-log.git", from: "1.0.0"),
+        .package(url: "https://github.com/apple/swift-nio.git", from: "2.2.0"),
+        .package(url: "https://github.com/apple/swift-nio-ssl.git", from: "2.1.0"),
+        .package(url: "https://github.com/apple/swift-nio-http2.git", from: "1.2.1"),
+        .package(url: "https://github.com/apple/swift-nio-extras.git", from: "1.1.0"),
+        .package(url: "https://github.com/apple/swift-log.git", from: "1.1.0"),
         .package(url: "https://github.com/apple/swift-package-manager", .branch("swift-5.0-branch")),
     ],
     targets: [
