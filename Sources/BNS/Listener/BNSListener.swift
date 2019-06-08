@@ -95,11 +95,11 @@ public final class BNSListener {
     ///     case let .http1(httpConection):
     ///       httpConnection.stateUpdateHandler = ...
     ///       httpConnection.newStreamHandler = ...
-    ///       httpConnection.start()
+    ///       httpConnection.start(...)
     ///     case let .http2(httpConection):
     ///       httpConnection.stateUpdateHandler = ...
     ///       httpConnection.newStreamHandler = ...
-    ///       httpConnection.start()
+    ///       httpConnection.start(...)
     ///     case .webSocket:
     ///       break
     ///   }

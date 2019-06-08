@@ -24,7 +24,7 @@ internal extension BNSChannelHandlerCloseLoggable
     }
 }
 
-internal extension BNSChannelHandlerTriggerUserOutboundEventLoggable
+internal extension BNSChannelHandlerCloseLoggable
     where Self: BNSOnlyLoggerChannelHandlerLoggable & BNSOnlyQueuePossiblyQueueable {
     func close(context: ChannelHandlerContext, mode: CloseMode, promise: EventLoopPromise<Void>?) {
         self.logDebug("close(): \(mode)")
