@@ -15,7 +15,7 @@
 import Foundation
 import NIO
 
-private struct SendHandler<DataType> {
+internal struct SendHandler<DataType> {
     let content: DataType?
     let contentContext: BNSStreamContentContext
     let isComplete: Bool
@@ -51,8 +51,6 @@ internal extension BNSWritableStream where Self: BNSEventLoopProtectedLoggable {
             if shouldFlush {
                 self.logDebug("Flushing with no content")
                 self.channel.flush()
-            } else {
-                assertionFailure("Write with no content and no intention to flush")
             }
             promise.succeed(())
             return promise.futureResult
@@ -71,12 +69,12 @@ internal extension BNSWritableStream where Self: BNSEventLoopProtectedLoggable {
     }
 }
 
-internal struct BNSSendBuffer<Stream: BNSWritableStream & BNSEventLoopProtectedLoggable> {
-    private var sendHandlers: CircularBuffer<SendHandler<Stream.BNSWritableStreamDataType>>
+internal final class BNSSendBuffer<Stream: BNSWritableStream & BNSEventLoopProtectedLoggable> {
+    var sendHandlers: CircularBuffer<SendHandler<Stream.BNSWritableStreamDataType>>
         = CircularBuffer<SendHandler<Stream.BNSWritableStreamDataType>>(initialCapacity: 4)
-    private var hasWritten: Bool = false
+    var hasWritten: Bool = false
 
-    internal mutating func send(
+    func send(
         content: Stream.BNSWritableStreamDataType?,
         contentContext: BNSStreamContentContext,
         isComplete: Bool,
@@ -97,68 +95,6 @@ internal struct BNSSendBuffer<Stream: BNSWritableStream & BNSEventLoopProtectedL
 
         switch stream.eventLoopProtectedState.state {
         case .ready:
-            self.processHandler(
-                content: content,
-                contentContext: contentContext,
-                isComplete: isComplete,
-                completion: completion,
-                stream: stream
-            )
-            return
-        case .setup, .preparing:
-            break
-        case .failed, .cancelled:
-            switch completion {
-            case .idempotent:
-                break
-            case let .contentProcessed(callback):
-                stream.withQueueIfPossible { callback(BNSStreamError.invalidState) }
-            }
-            return
-        }
-
-        self.sendHandlers.append(
-            SendHandler(
-                content: content,
-                contentContext: contentContext,
-                isComplete: isComplete,
-                completion: completion
-            )
-        )
-
-        self.process(on: stream)
-    }
-
-    internal mutating func process(on stream: Stream) {
-        stream.eventLoop.assertInEventLoop()
-
-        stream.logTrace("Processing send buffer")
-        defer { stream.logTrace("Finished processing send buffer") }
-
-        let completedContextHandlers = self.sendHandlers.filter { $0.isComplete }
-        self.sendHandlers.removeAll(where: { $0.isComplete })
-
-        for handler in completedContextHandlers {
-            self.processHandler(
-                content: handler.content,
-                contentContext: handler.contentContext,
-                isComplete: handler.isComplete,
-                completion: handler.completion,
-                stream: stream
-            )
-        }
-    }
-
-    internal mutating func processHandler(
-        content: Stream.BNSWritableStreamDataType?,
-        contentContext: BNSStreamContentContext,
-        isComplete: Bool,
-        completion: BNSStreamSendCompletion,
-        stream: Stream
-    ) {
-        stream.eventLoop.assertInEventLoop()
-
-        guard isComplete else {
             self.sendHandlers.append(
                 SendHandler(
                     content: content,
@@ -167,8 +103,47 @@ internal struct BNSSendBuffer<Stream: BNSWritableStream & BNSEventLoopProtectedL
                     completion: completion
                 )
             )
-            return
+            self.process(on: stream)
+        case .setup, .preparing:
+            self.sendHandlers.append(
+                SendHandler(
+                    content: content,
+                    contentContext: contentContext,
+                    isComplete: isComplete,
+                    completion: completion
+                )
+            )
+        case .failed, .cancelled:
+            switch completion {
+            case .idempotent:
+                break
+            case let .contentProcessed(callback):
+                stream.withQueueIfPossible { callback(BNSStreamError.invalidState) }
+            }
         }
+    }
+
+    func process(on stream: Stream) {
+        stream.eventLoop.assertInEventLoop()
+
+        stream.logTrace("Processing send buffer")
+        defer { stream.logTrace("Finished processing send buffer") }
+
+        let completedContexts = self.sendHandlers.filter { $0.isComplete }.map { $0.contentContext }
+
+        for contentContext in completedContexts {
+            self.process(
+                contentContext: contentContext,
+                on: stream
+            )
+        }
+    }
+
+    func process(
+        contentContext: BNSStreamContentContext,
+        on stream: Stream
+    ) {
+        stream.eventLoop.assertInEventLoop()
 
         let currentContext = ObjectIdentifier(contentContext)
 
@@ -184,17 +159,10 @@ internal struct BNSSendBuffer<Stream: BNSWritableStream & BNSEventLoopProtectedL
             )
         }
 
-        writeHandler(
-            content: content,
-            contentContext: contentContext,
-            isComplete: isComplete,
-            completion: completion,
-            stream: stream
-        )
         self.sendHandlers.removeAll(where: { ObjectIdentifier($0.contentContext) == currentContext })
     }
 
-    internal mutating func writeHandler(
+    func writeHandler(
         content: Stream.BNSWritableStreamDataType?,
         contentContext: BNSStreamContentContext,
         isComplete: Bool,
@@ -218,7 +186,6 @@ internal struct BNSSendBuffer<Stream: BNSWritableStream & BNSEventLoopProtectedL
         } else if isComplete {
             writeFuture = stream.write(content: nil, shouldFlush: true)
         } else {
-            assertionFailure("Invalid sendHandler. No content and it is not signaling the content is complete.")
             return
         }
 
@@ -241,7 +208,7 @@ internal struct BNSSendBuffer<Stream: BNSWritableStream & BNSEventLoopProtectedL
         }
     }
 
-    internal mutating func cancel(on stream: Stream) {
+    func cancel(on stream: Stream) {
         stream.eventLoop.assertInEventLoop()
 
         self.sendHandlers.forEach { handler in
