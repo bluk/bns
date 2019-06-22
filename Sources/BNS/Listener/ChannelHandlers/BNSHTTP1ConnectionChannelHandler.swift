@@ -19,9 +19,7 @@ import NIOHTTP1
 internal final class BNSHTTP1ConnectionChannelHandler: ChannelInboundHandler,
     ChannelOutboundHandler,
     RemovableChannelHandler,
-    BNSWithLoggableInstanceChannelHandlerLoggable,
-    BNSChannelHandlerCloseLoggable,
-    BNSChannelHandlerTriggerUserOutboundEventLoggable {
+    BNSWithLoggableInstanceChannelHandlerLoggable {
     public typealias InboundIn = HTTPServerRequestPart
     public typealias InboundOut = HTTPServerRequestPart
     public typealias OutboundIn = HTTPServerResponsePart

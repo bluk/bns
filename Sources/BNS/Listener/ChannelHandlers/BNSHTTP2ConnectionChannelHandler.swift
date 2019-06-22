@@ -20,9 +20,7 @@ import NIOHTTP2
 internal final class BNSHTTP2ConnectionChannelHandler: ChannelInboundHandler,
     ChannelOutboundHandler,
     RemovableChannelHandler,
-    BNSWithLoggableInstanceChannelHandlerLoggable,
-    BNSChannelHandlerCloseLoggable,
-    BNSChannelHandlerTriggerUserOutboundEventLoggable {
+    BNSWithLoggableInstanceChannelHandlerLoggable {
     public typealias InboundIn = HTTP2Frame
     public typealias InboundOut = HTTP2Frame
     public typealias OutboundIn = HTTP2Frame

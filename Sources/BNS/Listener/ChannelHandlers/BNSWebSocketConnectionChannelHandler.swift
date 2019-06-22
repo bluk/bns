@@ -19,9 +19,7 @@ import NIOWebSocket
 internal final class BNSWebSocketConnectionChannelHandler: ChannelInboundHandler,
     ChannelOutboundHandler,
     RemovableChannelHandler,
-    BNSWithLoggableInstanceChannelHandlerLoggable,
-    BNSChannelHandlerCloseLoggable,
-    BNSChannelHandlerTriggerUserOutboundEventLoggable {
+    BNSWithLoggableInstanceChannelHandlerLoggable {
     public typealias InboundIn = WebSocketFrame
     public typealias InboundOut = WebSocketFrame
     public typealias OutboundIn = WebSocketFrame

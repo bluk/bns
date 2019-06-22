@@ -20,9 +20,7 @@ import NIOHTTP2
 internal final class BNSHTTP2CreatedStreamChannelHandler: ChannelInboundHandler,
     ChannelOutboundHandler,
     RemovableChannelHandler,
-    BNSWithLoggableInstanceChannelHandlerLoggable,
-    BNSChannelHandlerCloseLoggable,
-    BNSChannelHandlerTriggerUserOutboundEventLoggable {
+    BNSWithLoggableInstanceChannelHandlerLoggable {
     public typealias InboundIn = HTTPServerRequestPart
     public typealias InboundOut = HTTPServerRequestPart
     public typealias OutboundIn = HTTPServerResponsePart
