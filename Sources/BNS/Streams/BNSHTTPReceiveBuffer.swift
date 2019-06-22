@@ -29,14 +29,13 @@ internal protocol BNSReadableStream: BNSEventLoopProtectedPossiblyQueueable {
     var isCancelCalled: Bool { get set }
 }
 
-internal struct BNSHTTPReceiveBuffer<Stream: BNSReadableStream> {
+internal final class BNSHTTPReceiveBuffer<Stream: BNSReadableStream> {
     private var receiveHandlers: CircularBuffer<ReceiveHandler> = CircularBuffer<ReceiveHandler>(initialCapacity: 4)
-    private var receiveBuffer: CircularBuffer<ByteBuffer> = CircularBuffer<ByteBuffer>(initialCapacity: 8)
-    private var isComplete: Bool = false
-    internal var totalByteCount = 0
-    internal var currentByteOffset = 0
+    var receiveBuffer: CircularBuffer<ByteBuffer> = CircularBuffer<ByteBuffer>(initialCapacity: 8)
+    var isComplete: Bool = false
+    var totalByteCount = 0
 
-    internal mutating func receive(
+    func receive(
         minimumIncompleteLength: Int,
         maximumLength: Int,
         completion: @escaping (Data?, BNSStreamContentContext?, Bool, Error?) -> Void,
@@ -70,7 +69,7 @@ internal struct BNSHTTPReceiveBuffer<Stream: BNSReadableStream> {
         self.process(on: stream)
     }
 
-    internal mutating func add(data: ByteBuffer?, isComplete: Bool, on stream: Stream) {
+    func add(data: ByteBuffer?, isComplete: Bool, on stream: Stream) {
         stream.eventLoop.assertInEventLoop()
 
         assert(!self.isComplete, "Data being added even though it was supposedly completed.")
@@ -86,7 +85,7 @@ internal struct BNSHTTPReceiveBuffer<Stream: BNSReadableStream> {
         self.process(on: stream)
     }
 
-    internal mutating func process(on stream: Stream) {
+    func process(on stream: Stream) {
         stream.eventLoop.assertInEventLoop()
 
         switch stream.eventLoopProtectedState.state {
@@ -101,31 +100,39 @@ internal struct BNSHTTPReceiveBuffer<Stream: BNSReadableStream> {
         }
 
         while let handler = self.receiveHandlers.first {
-            guard totalByteCount > handler.minimumIncompleteLength || self.isComplete else {
+            guard self.totalByteCount > handler.minimumIncompleteLength || self.isComplete else {
                 return
             }
 
-            if handler.waitForComplete {
-                guard self.isComplete else {
-                    return
-                }
+            if handler.waitForComplete, !self.isComplete {
+                return
             }
 
             var bytesLeftToRead = handler.maximumLength > 0
-                ? min(handler.maximumLength, totalByteCount) : totalByteCount
+                ? min(handler.maximumLength, self.totalByteCount) : self.totalByteCount
             var data = Data()
             data.reserveCapacity(bytesLeftToRead)
 
-            while bytesLeftToRead > 0,
-                var byteBuffer = self.receiveBuffer.popFirst() {
-                let lengthInByteBufferToRead = min(byteBuffer.readableBytes, bytesLeftToRead)
-                guard let readBytes = byteBuffer.readBytes(length: lengthInByteBufferToRead) else {
+            while var content = self.receiveBuffer.popFirst() {
+                let bytesToRead = min(content.readableBytes, bytesLeftToRead)
+                defer {
+                    if content.readableBytes != 0 {
+                        self.receiveBuffer.prepend(content)
+                        assert(bytesLeftToRead == 0)
+                    }
+                }
+
+                guard let readBytes = content.readBytes(length: bytesToRead) else {
                     preconditionFailure("Did not read the expected number of bytes in the buffer.")
                 }
+                assert(readBytes.count == bytesToRead)
+
                 data.append(contentsOf: readBytes)
-                bytesLeftToRead -= lengthInByteBufferToRead
-                if byteBuffer.readableBytes != 0 {
-                    self.receiveBuffer.prepend(byteBuffer)
+                bytesLeftToRead -= bytesToRead
+                totalByteCount -= bytesToRead
+
+                if bytesLeftToRead == 0 {
+                    break
                 }
             }
 
@@ -134,15 +141,21 @@ internal struct BNSHTTPReceiveBuffer<Stream: BNSReadableStream> {
             self.receiveHandlers.removeFirst()
 
             let isComplete = self.isComplete
-            let isEmpty = self.receiveBuffer.isEmpty
+            let isEmpty = self.totalByteCount == 0
+            assert({ () -> Bool in
+                if isEmpty {
+                    return self.receiveBuffer.isEmpty
+                }
+                return true
+            }())
 
             queue.async {
-                handler.completion(data, nil, isComplete && isEmpty, nil)
+                handler.completion(data.isEmpty ? nil : data, nil, isComplete && isEmpty, nil)
             }
         }
     }
 
-    internal mutating func cancel(on stream: Stream) {
+    func cancel(on stream: Stream) {
         stream.eventLoop.assertInEventLoop()
 
         self.receiveBuffer.removeAll()

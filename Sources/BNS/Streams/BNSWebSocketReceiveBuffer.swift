@@ -20,11 +20,11 @@ private struct ReceiveHandler {
     let completion: (WebSocketFrame?, BNSStreamContentContext?, Bool, Error?) -> Void
 }
 
-internal struct BNSWebSocketReceiveBuffer {
+internal final class BNSWebSocketReceiveBuffer {
     private var receiveHandlers: CircularBuffer<ReceiveHandler> = CircularBuffer<ReceiveHandler>(initialCapacity: 8)
-    private var receiveBuffer: CircularBuffer<WebSocketFrame> = CircularBuffer<WebSocketFrame>(initialCapacity: 8)
+    var receiveBuffer: CircularBuffer<WebSocketFrame> = CircularBuffer<WebSocketFrame>(initialCapacity: 8)
 
-    internal mutating func receive(
+    func receive(
         completion: @escaping (WebSocketFrame?, BNSStreamContentContext?, Bool, Error?) -> Void,
         on stream: BNSWebSocketStream
     ) {
@@ -48,7 +48,7 @@ internal struct BNSWebSocketReceiveBuffer {
         self.process(on: stream)
     }
 
-    internal mutating func add(frame: WebSocketFrame, on stream: BNSWebSocketStream) {
+    func add(frame: WebSocketFrame, on stream: BNSWebSocketStream) {
         stream.eventLoop.assertInEventLoop()
 
         self.receiveBuffer.append(frame)
@@ -56,7 +56,7 @@ internal struct BNSWebSocketReceiveBuffer {
         self.process(on: stream)
     }
 
-    internal mutating func process(on stream: BNSWebSocketStream) {
+    func process(on stream: BNSWebSocketStream) {
         stream.eventLoop.assertInEventLoop()
 
         switch stream.eventLoopProtectedState.state {
@@ -80,7 +80,7 @@ internal struct BNSWebSocketReceiveBuffer {
         }
     }
 
-    internal mutating func cancel(on stream: BNSWebSocketStream) {
+    func cancel(on stream: BNSWebSocketStream) {
         stream.eventLoop.assertInEventLoop()
 
         self.receiveBuffer.removeAll()
