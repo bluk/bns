@@ -69,7 +69,9 @@ internal final class BNSWebSocketConnectionChannelHandler: ChannelInboundHandler
                 to: .failed(BNSConnectionError.idleTimeout),
                 on: self.connection
             )
-            _ = context.close()
+            context.close().whenFailure { error in
+                context.fireErrorCaught(error)
+            }
         default:
             break
         }

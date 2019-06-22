@@ -300,7 +300,9 @@ public final class BNSListener {
                     self.stateUpdateHandler = nil
                 }
             }
-            _ = channel.close()
+            channel.close().whenFailure { error in
+                assertionFailure("Unexpected error: \(error)")
+            }
         }
     }
 }

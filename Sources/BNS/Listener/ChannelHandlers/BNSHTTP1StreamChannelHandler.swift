@@ -110,7 +110,9 @@ internal final class BNSHTTP1StreamChannelHandler: ChannelInboundHandler,
         switch event {
         case _ as IdleStateHandler.IdleStateEvent:
             stream.eventLoopProtectedState.transition(to: .failed(BNSStreamError.idleTimeout), on: stream)
-            _ = context.close()
+            context.close().whenFailure { error in
+                context.fireErrorCaught(error)
+            }
         default:
             break
         }

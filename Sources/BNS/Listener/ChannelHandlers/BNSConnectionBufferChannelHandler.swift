@@ -74,7 +74,9 @@ internal final class BNSHTTP1ConnectionBufferChannelHandler: BNSConnectionBuffer
             case let .body(bodyBytes):
                 self.totalBytesBuffered += bodyBytes.readableBytes
                 if totalBytesBuffered > maxBufferSizeBeforeConnectionStart {
-                    _ = context.close()
+                    context.close().whenFailure { error in
+                        context.fireErrorCaught(error)
+                    }
                     return
                 }
             default:
@@ -132,7 +134,9 @@ internal final class BNSHTTP2ConnectionBufferChannelHandler: BNSConnectionBuffer
             case let .data(frameData):
                 self.totalBytesBuffered += frameData.data.readableBytes
                 if totalBytesBuffered > maxBufferSizeBeforeConnectionStart {
-                    _ = context.close()
+                    context.close().whenFailure { error in
+                        context.fireErrorCaught(error)
+                    }
                     return
                 }
             default:
@@ -189,7 +193,9 @@ internal final class BNSWSConnectionBufferChannelHandler: BNSConnectionBufferCha
             self.totalBytesBuffered += webSocketFrame.length
 
             if totalBytesBuffered > maxBufferSizeBeforeConnectionStart {
-                _ = context.close()
+                context.close().whenFailure { error in
+                    context.fireErrorCaught(error)
+                }
                 return
             }
         }
@@ -269,7 +275,9 @@ internal extension BNSConnectionBufferChannelHandler
             return
         }
         self.hasRemovedHandler = true
-        _ = context.pipeline.removeHandler(self)
+        context.pipeline.removeHandler(self).whenFailure { error in
+            assertionFailure("Unexpected error: \(error)")
+        }
     }
 
     // swiftlint:enable cyclomatic_complexity

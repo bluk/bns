@@ -66,7 +66,9 @@ internal extension BNSHTTPReadableWritable where Self: BNSEventLoopProtectedLogg
         self.logDebug("Writing responseHead: \(responseHead)")
         self.withQueueIfPossible { self.wasResponseHeadWritten = true }
 
-        _ = self.channel.write(HTTPServerResponsePart.head(responseHead))
+        self.channel.write(HTTPServerResponsePart.head(responseHead)).whenFailure { error in
+            assertionFailure("Unexpected error: \(error)")
+        }
     }
 
     func writeFinished() {
@@ -79,6 +81,9 @@ internal extension BNSHTTPReadableWritable where Self: BNSEventLoopProtectedLogg
             """
         )
 
-        _ = self.channel.writeAndFlush(HTTPServerResponsePart.end(self.eventLoopProtectedResponseTrailerHeaders))
+        self.channel.writeAndFlush(HTTPServerResponsePart.end(self.eventLoopProtectedResponseTrailerHeaders))
+            .whenFailure { error in
+                assertionFailure("Unexpected error: \(error)")
+            }
     }
 }
