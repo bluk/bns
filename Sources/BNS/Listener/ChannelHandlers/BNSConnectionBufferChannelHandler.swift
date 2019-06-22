@@ -31,24 +31,27 @@ internal enum BufferedEvent {
 
 internal final class BNSHTTP1ConnectionBufferChannelHandler: BNSConnectionBufferChannelHandler,
     ChannelInboundHandler,
+    ChannelOutboundHandler,
     RemovableChannelHandler,
     BNSOnlyQueuePossiblyQueueable,
     BNSOnlyLoggerChannelHandlerLoggable {
-    public typealias InboundIn = HTTPServerRequestPart
-    public typealias InboundOut = HTTPServerRequestPart
+    typealias InboundIn = HTTPServerRequestPart
+    typealias InboundOut = HTTPServerRequestPart
+    typealias OutboundIn = Never
+    typealias OutboundOut = Never
 
-    internal let logger: Logger?
-    internal let queue: DispatchQueue?
-    internal var isBuffering = true
-    internal var hasRemovedHandler = false
+    let logger: Logger?
+    let queue: DispatchQueue?
+    var isBuffering = true
+    var hasRemovedHandler = false
 
-    internal var bufferedEvents: [BufferedEvent]
-    internal var context: ChannelHandlerContext?
-    internal var eventLoop: EventLoop?
-    internal var totalBytesBuffered: Int = 0
-    internal var maxBufferSizeBeforeConnectionStart: Int?
+    var bufferedEvents: [BufferedEvent]
+    var context: ChannelHandlerContext?
+    var eventLoop: EventLoop?
+    var totalBytesBuffered: Int = 0
+    var maxBufferSizeBeforeConnectionStart: Int?
 
-    public init(
+    init(
         maxBufferSizeBeforeConnectionStart: Int?,
         queue: DispatchQueue,
         logger: Logger? = nil
@@ -85,30 +88,33 @@ internal final class BNSHTTP1ConnectionBufferChannelHandler: BNSConnectionBuffer
         }
 
         self.bufferedEvents.append(.readData(data))
-        checkIfStillBuffering(context: context)
+        self.tryToFlushBuffer(context: context)
     }
 }
 
 internal final class BNSHTTP2ConnectionBufferChannelHandler: BNSConnectionBufferChannelHandler,
     ChannelInboundHandler,
+    ChannelOutboundHandler,
     RemovableChannelHandler,
     BNSOnlyQueuePossiblyQueueable,
     BNSOnlyLoggerChannelHandlerLoggable {
-    public typealias InboundIn = HTTP2Frame
-    public typealias InboundOut = HTTP2Frame
+    typealias InboundIn = HTTP2Frame
+    typealias InboundOut = HTTP2Frame
+    typealias OutboundIn = Never
+    typealias OutboundOut = Never
 
-    internal let logger: Logger?
-    internal let queue: DispatchQueue?
-    internal var isBuffering = true
-    internal var hasRemovedHandler = false
+    let logger: Logger?
+    let queue: DispatchQueue?
+    var isBuffering = true
+    var hasRemovedHandler = false
 
-    internal var bufferedEvents: [BufferedEvent]
-    internal var context: ChannelHandlerContext?
-    internal var eventLoop: EventLoop?
-    internal var totalBytesBuffered: Int = 0
-    internal var maxBufferSizeBeforeConnectionStart: Int?
+    var bufferedEvents: [BufferedEvent]
+    var context: ChannelHandlerContext?
+    var eventLoop: EventLoop?
+    var totalBytesBuffered: Int = 0
+    var maxBufferSizeBeforeConnectionStart: Int?
 
-    public init(
+    init(
         maxBufferSizeBeforeConnectionStart: Int?,
         queue: DispatchQueue,
         logger: Logger? = nil
@@ -145,30 +151,33 @@ internal final class BNSHTTP2ConnectionBufferChannelHandler: BNSConnectionBuffer
         }
 
         self.bufferedEvents.append(.readData(data))
-        checkIfStillBuffering(context: context)
+        self.tryToFlushBuffer(context: context)
     }
 }
 
 internal final class BNSWSConnectionBufferChannelHandler: BNSConnectionBufferChannelHandler,
     ChannelInboundHandler,
+    ChannelOutboundHandler,
     RemovableChannelHandler,
     BNSOnlyQueuePossiblyQueueable,
     BNSOnlyLoggerChannelHandlerLoggable {
-    public typealias InboundIn = WebSocketFrame
-    public typealias InboundOut = WebSocketFrame
+    typealias InboundIn = WebSocketFrame
+    typealias InboundOut = WebSocketFrame
+    typealias OutboundIn = Never
+    typealias OutboundOut = Never
 
-    internal let logger: Logger?
-    internal let queue: DispatchQueue?
-    internal var isBuffering = true
-    internal var hasRemovedHandler = false
+    let logger: Logger?
+    let queue: DispatchQueue?
+    var isBuffering = true
+    var hasRemovedHandler = false
 
-    internal var bufferedEvents: [BufferedEvent]
-    internal var context: ChannelHandlerContext?
-    internal var eventLoop: EventLoop?
-    internal var totalBytesBuffered: Int = 0
-    internal var maxBufferSizeBeforeConnectionStart: Int?
+    var bufferedEvents: [BufferedEvent]
+    var context: ChannelHandlerContext?
+    var eventLoop: EventLoop?
+    var totalBytesBuffered: Int = 0
+    var maxBufferSizeBeforeConnectionStart: Int?
 
-    public init(
+    init(
         maxBufferSizeBeforeConnectionStart: Int?,
         queue: DispatchQueue,
         logger: Logger? = nil
@@ -201,11 +210,12 @@ internal final class BNSWSConnectionBufferChannelHandler: BNSConnectionBufferCha
         }
 
         self.bufferedEvents.append(.readData(data))
-        checkIfStillBuffering(context: context)
+        self.tryToFlushBuffer(context: context)
     }
 }
 
 internal protocol BNSConnectionBufferChannelHandler: ChannelInboundHandler,
+    ChannelOutboundHandler,
     RemovableChannelHandler {
     var isBuffering: Bool { get set }
     var hasRemovedHandler: Bool { get set }
@@ -213,41 +223,30 @@ internal protocol BNSConnectionBufferChannelHandler: ChannelInboundHandler,
     var maxBufferSizeBeforeConnectionStart: Int? { get }
 
     var bufferedEvents: [BufferedEvent] { get set }
-    var context: ChannelHandlerContext? { get set }
-    var eventLoop: EventLoop? { get set }
 }
+
+internal struct BNSConnectionShouldStopInboundBufferingEvent {}
 
 internal extension BNSConnectionBufferChannelHandler
     where Self: BNSOnlyLoggerChannelHandlerLoggable & BNSOnlyQueuePossiblyQueueable {
-    func stopBufferingAndFlush() {
-        self.logTrace("Stop buffering and flush")
-        self.isBuffering = false
-        tryToFlushBuffer()
-    }
+    func triggerUserOutboundEvent(context: ChannelHandlerContext, event: Any, promise: EventLoopPromise<Void>?) {
+        defer { context.triggerUserOutboundEvent(event, promise: promise) }
 
-    func checkIfStillBuffering(context: ChannelHandlerContext) {
-        self.logTrace("Checking if still buffering")
-        self.context = context
-        self.eventLoop = context.channel.eventLoop
-        tryToFlushBuffer()
+        if event is BNSConnectionShouldStopInboundBufferingEvent {
+            self.logTrace("Stop buffering and flush")
+            self.isBuffering = false
+            self.tryToFlushBuffer(context: context)
+        }
     }
 
     // swiftlint:disable cyclomatic_complexity
 
-    func tryToFlushBuffer() {
+    func tryToFlushBuffer(context: ChannelHandlerContext) {
         self.logTrace("Trying to flush buffer")
         guard !self.isBuffering else {
             self.logTrace("Still buffering so returning")
             return
         }
-
-        guard let context = self.context,
-            let eventLoop = self.eventLoop else {
-            self.logTrace("Don't have the context or event loop yet, so returning")
-            return
-        }
-
-        eventLoop.assertInEventLoop()
 
         for event in self.bufferedEvents {
             switch event {
@@ -276,7 +275,17 @@ internal extension BNSConnectionBufferChannelHandler
         }
         self.hasRemovedHandler = true
         context.pipeline.removeHandler(self).whenFailure { error in
-            assertionFailure("Unexpected error: \(error)")
+            switch error {
+            case let pipelineError as ChannelPipelineError:
+                switch pipelineError {
+                case .notFound:
+                    break
+                default:
+                    assertionFailure("Unexpected error: \(error)")
+                }
+            default:
+                assertionFailure("Unexpected error: \(error)")
+            }
         }
     }
 
@@ -284,43 +293,41 @@ internal extension BNSConnectionBufferChannelHandler
 
     func channelRegistered(context: ChannelHandlerContext) {
         context.fireChannelRegistered()
-        checkIfStillBuffering(context: context)
+        self.tryToFlushBuffer(context: context)
     }
 
     func channelUnregistered(context: ChannelHandlerContext) {
-        self.context = nil
-        self.eventLoop = nil
         context.fireChannelUnregistered()
-        checkIfStillBuffering(context: context)
+        self.tryToFlushBuffer(context: context)
     }
 
     func channelActive(context: ChannelHandlerContext) {
         self.bufferedEvents.append(.active)
-        checkIfStillBuffering(context: context)
+        self.tryToFlushBuffer(context: context)
     }
 
     func channelInactive(context: ChannelHandlerContext) {
         self.bufferedEvents.append(.inactive)
-        checkIfStillBuffering(context: context)
+        self.tryToFlushBuffer(context: context)
     }
 
     func channelReadComplete(context: ChannelHandlerContext) {
         self.bufferedEvents.append(.readComplete)
-        checkIfStillBuffering(context: context)
+        self.tryToFlushBuffer(context: context)
     }
 
     func channelWritabilityChanged(context: ChannelHandlerContext) {
         self.bufferedEvents.append(.writabilityChanged)
-        checkIfStillBuffering(context: context)
+        self.tryToFlushBuffer(context: context)
     }
 
     func userInboundEventTriggered(context: ChannelHandlerContext, event: Any) {
         self.bufferedEvents.append(.userInboundEventTriggered(event))
-        checkIfStillBuffering(context: context)
+        self.tryToFlushBuffer(context: context)
     }
 
     func errorCaught(context: ChannelHandlerContext, error: Error) {
         self.bufferedEvents.append(.errorCaught(error))
-        checkIfStillBuffering(context: context)
+        self.tryToFlushBuffer(context: context)
     }
 }

@@ -33,11 +33,21 @@ internal extension ChannelPipeline {
 
         let h2Connection = BNSHTTP2Connection(
             channel: context.channel,
-            internalStartHandler: { [weak connectionBufferChannelHandler] in
+            internalStartHandler: {
                 finishPipelineInitFuture.whenComplete { _ in
-                    context.channel.eventLoop.execute {
-                        connectionBufferChannelHandler?.stopBufferingAndFlush()
-                    }
+                    context.channel.triggerUserOutboundEvent(BNSConnectionShouldStopInboundBufferingEvent())
+                        .whenFailure { error in
+                            if let channelError = error as? ChannelError {
+                                switch channelError {
+                                case .ioOnClosedChannel:
+                                    break
+                                default:
+                                    assertionFailure("Unexpected error in \(error)")
+                                }
+                            } else {
+                                assertionFailure("Unexpected error in \(error)")
+                            }
+                        }
                 }
             }
         )

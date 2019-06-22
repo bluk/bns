@@ -63,10 +63,22 @@ internal extension ChannelPipeline {
 
         let http1Connection = BNSHTTP1Connection(
             channel: context.channel,
-            internalStartHandler: { [weak connectionBufferChannelHandler] in
+            internalStartHandler: {
                 finishPipelineInitFuture.whenComplete { _ in
                     context.channel.eventLoop.execute {
-                        connectionBufferChannelHandler?.stopBufferingAndFlush()
+                        context.channel.triggerUserOutboundEvent(BNSConnectionShouldStopInboundBufferingEvent())
+                            .whenFailure { error in
+                                if let channelError = error as? ChannelError {
+                                    switch channelError {
+                                    case .ioOnClosedChannel:
+                                        break
+                                    default:
+                                        assertionFailure("Unexpected error in \(error)")
+                                    }
+                                } else {
+                                    assertionFailure("Unexpected error in \(error)")
+                                }
+                            }
                     }
                 }
             }
@@ -209,9 +221,21 @@ internal extension ChannelPipeline {
                                 // swiftlint:disable line_length
                                 let webSocketConnection: BNSWebSocketConnection = BNSWebSocketConnection(
                                     channel: channel,
-                                    internalStartHandler: { [weak connectionBufferChannelHandler] (webSocketConnection: BNSWebSocketConnection) in
+                                    internalStartHandler: { (webSocketConnection: BNSWebSocketConnection) in
                                         channel.eventLoop.execute {
-                                            connectionBufferChannelHandler?.stopBufferingAndFlush()
+                                            channel.triggerUserOutboundEvent(BNSConnectionShouldStopInboundBufferingEvent())
+                                                .whenFailure { error in
+                                                    if let channelError = error as? ChannelError {
+                                                        switch channelError {
+                                                        case .ioOnClosedChannel:
+                                                            break
+                                                        default:
+                                                            assertionFailure("Unexpected error in \(error)")
+                                                        }
+                                                    } else {
+                                                        assertionFailure("Unexpected error in \(error)")
+                                                    }
+                                                }
                                             if let webSocketStream = newWebSocketStream {
                                                 guard let queue = webSocketConnection.queue else {
                                                     webSocketStream.cancel()
