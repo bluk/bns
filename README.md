@@ -23,16 +23,16 @@ you will either need to build them yourself or use a different library/framework
 
 ## Usage
 
-The latest version of Swift is used for development (currently 5.0.1).
+The latest version of Swift is used for development (currently 5.0.2).
 
 Add the following dependencies to your `Package.swift` file:
 
 ```swift
-.package(url: "https://github.com/apple/swift-nio.git", from: "2.0.1"),
-.package(url: "https://github.com/apple/swift-nio-ssl.git", from: "2.0.2"),
-.package(url: "https://github.com/apple/swift-nio-http2.git", from: "1.0.0"),
-.package(url: "https://github.com/apple/swift-nio-extras.git", from: "1.0.0"),
-.package(url: "https://github.com/apple/swift-log.git", from: "1.0.0"),
+.package(url: "https://github.com/apple/swift-nio.git", .upToNextMajor(from: "2.7.0")),
+.package(url: "https://github.com/apple/swift-nio-ssl.git", .upToNextMajor(from: "2.4.0")),
+.package(url: "https://github.com/apple/swift-nio-http2.git", .upToNextMajor(from: "1.5.0")),
+.package(url: "https://github.com/apple/swift-nio-extras.git", .upToNextMajor(from: "1.2.0")),
+.package(url: "https://github.com/apple/swift-log.git", .upToNextMajor(from: "1.1.0")),
 .package(url: "https://github.com/bluk/bns.git", .branch("master")),
 ```
 
