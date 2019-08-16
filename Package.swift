@@ -10,7 +10,7 @@ public let package = Package(
         .library(name: "BNS", targets: ["BNS"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/apple/swift-nio.git", .upToNextMajor(from: "2.6.1")),
+        .package(url: "https://github.com/apple/swift-nio.git", .upToNextMajor(from: "2.7.0")),
         .package(url: "https://github.com/apple/swift-nio-ssl.git", .upToNextMajor(from: "2.4.0")),
         .package(url: "https://github.com/apple/swift-nio-http2.git", .upToNextMajor(from: "1.5.0")),
         .package(url: "https://github.com/apple/swift-nio-extras.git", .upToNextMajor(from: "1.2.0")),
