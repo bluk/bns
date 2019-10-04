@@ -10,6 +10,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v1
       - name: Swift Build and Test
-        uses: "docker://bluk/docker-swift-build-tools@sha256:da3c2a2743cd7c1f878a7f8fd1f561625908b256f391c4cc6442b41a35665931"
+        uses: "docker://bluk/docker-swift-build-tools@sha256:905f90736507bb9d2f1f6f55da9b4f6fb69594be14f9f86454562fbb6bc986ce"
         with:
           args: swift test
