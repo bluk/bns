@@ -11,7 +11,7 @@ public let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/apple/swift-nio.git", .upToNextMajor(from: "2.8.0")),
-        .package(url: "https://github.com/apple/swift-nio-ssl.git", .upToNextMajor(from: "2.4.0")),
+        .package(url: "https://github.com/apple/swift-nio-ssl.git", .upToNextMajor(from: "2.4.1")),
         .package(url: "https://github.com/apple/swift-nio-http2.git", .upToNextMajor(from: "1.6.1")),
         .package(url: "https://github.com/apple/swift-nio-extras.git", .upToNextMajor(from: "1.2.0")),
         .package(url: "https://github.com/apple/swift-log.git", .upToNextMajor(from: "1.1.1")),
